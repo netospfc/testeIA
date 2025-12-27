@@ -22,10 +22,12 @@ git clone <url-do-repositorio>
 cd testeIA
 ```
 
-### 2. Compile o projeto
+### 2. Compile e empacote o projeto
 ```bash
-mvn clean compile
+mvn clean package
 ```
+
+Este comando compila o código, executa os testes e gera o arquivo JAR executável.
 
 ### 3. Execute a aplicação
 ```bash
@@ -74,15 +76,22 @@ src/
 └── test/
     └── java/
         └── com/example/demo/
-            └── DemoApplicationTests.java # Testes da aplicação
+            └── SaudacaoControllerTest.java # Testes unitários do controller
 ```
 
 ## 🧪 Testes
+
+O projeto inclui testes unitários para o controller `SaudacaoController`, testando as saudações para diferentes horários.
 
 Execute os testes com:
 ```bash
 mvn test
 ```
+
+Os testes utilizam:
+- **JUnit 5**: Framework de testes
+- **Spring Boot Test**: Para testes de integração
+- **Mockito**: Para mock de métodos estáticos (LocalTime.now())
 
 ## 📦 Build e Empacotamento
 
@@ -90,6 +99,12 @@ Para criar um JAR executável:
 ```bash
 mvn clean package
 ```
+
+Este comando executa:
+1. **Clean**: Remove arquivos antigos do `target/`
+2. **Compile**: Compila o código fonte
+3. **Test**: Executa todos os testes unitários
+4. **Package**: Empacota a aplicação em um JAR executável
 
 O arquivo `demo-0.0.1-SNAPSHOT.jar` será gerado na pasta `target/`.
 
