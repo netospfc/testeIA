@@ -1,0 +1,292 @@
+Aqui está o prompt completo para o Antigravity:
+
+---
+
+## Prompt para o Antigravity
+
+**Build a full-stack 3D printing studio management app called "Estúdio 3D" — a cost planning and operations platform for 3D printing businesses.**
+
+---
+
+### 🧱 Tech Stack
+
+- **Frontend:** React (no Next.js) — use Vite or Create React App. Choose your preferred UI and routing libraries (React Router, Axios, Chart.js or Recharts, i18next for multilingual, etc.)
+- **Backend:** Go (choose your preferred framework — Gin, Echo, or Fiber)
+- **Database:** H2 (use the H2 TCP/embedded server via JDBC from Go using a Java bridge, OR use SQLite as a functionally equivalent embedded alternative if H2+Go integration is too complex — keep it simple and embedded)
+- **Single start command:** The app must start with a single `npm start` from the root. That command must:
+  1. Run `npm install` inside the `client/` folder
+  2. Run `npm run build` inside `client/`
+  3. Start the Go backend which serves the built frontend as static files
+  4. All of this orchestrated from a root `package.json` with a `"start"` script
+
+> ⚠️ Critical: Always run `npm install` in the client directory BEFORE `npm run build`. If dependencies aren't installed first, the build will fail.
+
+---
+
+### 🎨 Design System
+
+Follow this visual identity strictly based on the reference screenshots:
+
+- **Primary color:** Deep navy/indigo (`#1a1f6e` or similar dark blue)
+- **Accent:** Bright royal blue (`#2233DD`) for buttons, active states, badges
+- **Success/profit:** Green (`#22c55e`)
+- **Warning:** Amber/orange
+- **Error:** Red
+- **Background:** Light gray (`#f4f5f7`) for page bg, white cards with subtle shadows
+- **Typography:** Clean sans-serif (Inter or similar), hierarchical font sizing
+- **Sidebar navigation** on desktop (240px wide, white, with icon+label nav items)
+- **Top navbar** on mobile
+- **Cards** with rounded corners (8–12px), subtle drop shadows
+- **Buttons:** Filled primary (dark navy/blue), outlined secondary, full-width on mobile
+- **Data tables:** Clean, minimal, zebra or hover highlights
+- **Charts:** Bar and donut/pie charts with brand colors
+- **Fully responsive** — works on mobile (375px+) and desktop (1280px+)
+
+---
+
+### 🌐 Multilingual (i18n)
+
+- Support **English (EN)** and **Portuguese PT-BR (PT)**
+- Language toggle visible in the top bar (EN | PT buttons)
+- All UI strings must be translatable — use i18next or similar
+- Default language: Portuguese (PT)
+
+---
+
+### 🔐 Screen 1 — Authentication (Login / Register)
+
+**Login page:**
+- Centered card on a light dotted/textured background
+- App logo + "ESTÚDIO 3D" title + subtitle "Precision manufacturing economics"
+- Email field with icon
+- Password field with show/hide toggle
+- Primary CTA button: "Acessar Estúdio →"
+- Link: "Não tem acesso? Solicitar Acesso"
+- Version info at bottom: "V2.4.0 • BUILD 8921"
+- Bottom-left: small grid hash icon + "SYS.READY"
+
+**Register/Request Access page:**
+- Name, email, studio name, password fields
+- Submit button
+
+---
+
+### 🏠 Screen 2 — Dashboard (Orders & Commissions)
+
+- Page title: "Orders & Commissions" with subtitle "Real-time tracking for active 3D printing workflows"
+- Search bar in top navbar
+- "+ New Order" button (blue, top right)
+- Language toggle (PT | EN)
+- **Kanban board** with 3 columns:
+  - **QUEUE** (count badge) — shows queued orders as cards
+  - **PRINTING** (count + "1 Active" badge) — shows active print jobs with progress bar + time remaining + printer name
+  - **POST-PROCESSING** (count + "2 Pending" badge) — shows finishing tasks (sanding, assembly, etc.)
+- Each order card shows: tag (PROTOTYPE / HIGH DETAIL / SANDING), order number (#ORD-XXX), product image, product name, material, price, and for active prints: % completed + time remaining + assigned printer
+
+---
+
+### 💰 Screen 3 — Cost Calculator
+
+- Page title: "Calculator" / "Cost Modeling"
+- Subtitle: "Real-time cost modeling & margin analysis"
+- Reset button + "Save to Portfolio" / "+ New Calculation" button
+- **3-column layout:**
+
+**Left panel — Input Parameters:**
+- Product Preset dropdown (e.g., "Articulated Dragon v2")
+- Filament dropdown (e.g., "Silk Gold PLA (Sunlu)") + stock info below
+- Printer dropdown (e.g., "Bambu Lab X1C (350W)")
+- Print Time (hours) — number input with up/down arrows
+- Net Weight (grams) — number input with up/down arrows
+
+**Center panel — Cost Breakdown:**
+- Line items: Material Cost, Energy Consumption, Machine Depreciation, Fail Rate Buffer (5%) with tooltip
+- Packaging section with S / M / L / None toggle buttons (selected = blue filled)
+- Operational Cost total (bold, large)
+- Cost Distribution bar chart (Material = dark, Energy = blue, Machine = gray)
+- Legend below chart
+
+**Right panel — Price Strategy:**
+- "TOTAL COST BASE" label + large R$ amount
+- Profit Margin slider (0%–200%, shows % badge)
+- Recommended Sale Price (large, with green trend arrow)
+- Net Profit (green, large "+R$") + Hourly Profit (R$/h)
+- "Save to Portfolio" button
+- Pricing Tip card at bottom (lightbulb icon, contextual advice based on margin/hours)
+
+All values update **in real-time** as inputs change.
+
+---
+
+### 📦 Screen 4 — Inventory
+
+**Sub-tabs:** Filamentos | Impressoras
+
+**Filaments tab:**
+- Filter pills: Todos | PLA (count) | PETG (count) | ABS (count)
+- Search bar
+- Table columns: STATUS (colored dot — green=ok, yellow=low, red=critical), MATERIAL/COR (color swatch + name + SKU), FABRICANTE, TIPO (badge), ESTOQUE RESTANTE (progress bar + grams)
+- "Add Filament" button
+
+**Edit Filament side panel (slide-in from right):**
+- Header: "Editar Filamento" + X close
+- Summary cards: CUSTO TOTAL and CUSTO/G
+- Fields: Nome do Material, Fabricante, Tipo dropdown, Cor Hex (color picker + hex input), Peso Inicial (g), Preço Pago (R$), Data da Compra, Notas textarea
+- Footer: Cancel + "Salvar Alterações" (blue)
+
+**Printers tab:**
+- Table: printer name, model, status, wattage, depreciation info
+
+---
+
+### 🏗️ Screen 5 — Product Architect
+
+- Left sidebar panel: search products, "+ New Product Blueprint" button, list of products (thumbnail + name + SKU)
+- Main area header: product name, DRAFT badge, last saved timestamp, Total Weight, Est. Time, Base Cost chips
+- SKU displayed below title
+- **Components (BOM) table:**
+  - Columns: #, Component Name (editable), Filament (dropdown with color dot), Weight (g) (editable), Time (h) (editable), Cost (calculated)
+  - "+ Add Component" row at bottom
+  - Subtotal (Materials) row
+  - Export CSV button
+- **Post-Processing & Labor section:**
+  - Checkbox cards: Manual Assembly (R$ 5.00, with description), Surface Sanding (R$ 10.00, with description)
+  - Checked cards have blue border + filled checkbox
+- Footer bar: TOTAL BLUEPRINT COST = R$ XX.XX (Mat + Lab breakdown), Discard Changes + Save Blueprint buttons
+
+---
+
+### 🔧 Screen 6 — Maintenance Schedule
+
+Dark theme page (dark navy background, white/light text):
+- Page title: "Maintenance Schedule", subtitle: "Track and manage 3D printer upkeep tasks to ensure peak performance"
+- Top right: "View Logs" button + "Schedule Task" button (blue)
+- **Calendar View | Timeline View** tabs (with icons)
+- Calendar: month view (October 2023), prev/today/next navigation, event pills on dates (colored by type: blue=lubrication, yellow=bed leveling, gray=rod lube, orange=scotch tape)
+- **Right sidebar — Overdue Maintenance panel:**
+  - Red header "Overdue Maintenance" with warning icon
+  - "3 DAYS OVERDUE" — Belt Tension Adjustment — Printer: Voron 2.4 - V012 — red "Resolve Now" button
+  - "1 DAY OVERDUE" — PID Tuning — Printer: Bambu X1C - B001
+- **Next Scheduled Tasks** list:
+  - Today • 11:00 — Z-Axis Lubrication — Prusa MK4 Unit 4
+  - Tomorrow • 09:30 — Clean Build Plate PEI — All Active Units
+  - Oct 14 • 10:00 — Firmware Update — Ender 3 v3 KE
+  - "View Full Timeline" link
+- Footer bar: 12 Printers Online (green dot) | 2 Pending Maintenance (yellow) | 2 Overdue Alerts (red)
+
+---
+
+### 📊 Screen 7 — Financial Reports
+
+- Page title: "Financial Reports", subtitle: "Macro-economic overview of your studio performance"
+- Date filter dropdown: "Last 30 Days" (top right) + notification + settings icons
+- **3 KPI cards (top row):**
+  - LUCRO MÉDIO/PEÇA: R$ 42,50 (+12% vs last month, green arrow)
+  - CUSTO ENERGÉTICO: R$ 184,20 (+5%, red arrow, ~350 kWh total)
+  - VALOR EM ESTOQUE: R$ 3.240,00 (—0%, 14.5kg of filament)
+- **Cost Distribution donut chart** (left): Total R$ 842, legend: Material (PLA/PETG) 55%, Energy & Deprec. 20%, Overhead & Labor 25%
+- **Material Usage bar chart** (right): KG | Cost toggle, horizontal bars for each filament (PLA Matte Black 4.2kg, PETG Translucent 2.8kg, Silk Gold PLA 1.5kg, TPU 95A Red 0.6kg)
+- **Hardware Efficiency table:**
+  - Title + "Download CSV" link
+  - Columns: MACHINE NAME, STATUS (Active/Idle badge), ACTIVE HOURS, AVG POWER (W) (blue text), TOTAL ENERGY COST
+  - Rows: Bambu Lab X1C #01 (Active, 142h 30m, 320W, R$ 42,15), Prusa MK4 #03 (Active, 98h 15m, 140W, R$ 12,80), Creality Ender 3 V2 (Idle, 12h, 280W, R$ 3,10)
+
+---
+
+### ⚙️ Screen 8 — Settings (Configurações)
+
+- Page title: "Configurações" with "Salvar Alterações" button (top right)
+- Subtitle: "Defina as variáveis globais de custo para garantir a precisão dos seus cálculos de impressão e margem de lucro."
+- **Section 1 — Energia Elétrica:** ⚡ icon, description, CUSTO POR KWH field (R$ 0.92 /kWh), info hint "Verifique o valor na sua última conta de luz."
+- **Section 2 — Custos Fixos & Depreciação:** 🏛 icon, DEPRECIAÇÃO PADRÃO (24 Meses), MARGEM DE ERRO (5 %)
+- **Section 3 — Embalagens & Insumos:** 📦 icon, "+ Adicionar" button, table of packaging items with name + unit cost (Caixa P Correios R$ 2.50, Plástico Bolha R$ 0.40, Etiqueta Térmica R$ 0.08), "+ Adicionar Nova Embalagem" row
+- Footer links: Documentação • Suporte
+
+---
+
+### 🗂️ Navigation Structure
+
+**Sidebar (desktop):**
+- Logo + studio name + plan badge
+- Dashboard
+- Inventory (Inventário / Estoque)
+- Product Architect (Arquiteto)
+- Calculator (Calculadora)
+- Maintenance
+- Financial Reports (Relatórios)
+- Settings (Configurações)
+- Help & Support (bottom)
+- User avatar + name + role + logout (bottom)
+
+**Mobile:** bottom tab bar or hamburger menu with the same items.
+
+---
+
+### 🔌 Backend API (Go)
+
+RESTful JSON API on port 8080. Serve the built React app as static files from the same port.
+
+Endpoints needed:
+- `POST /api/auth/login` — returns JWT token
+- `POST /api/auth/register`
+- `GET/POST/PUT/DELETE /api/filaments`
+- `GET/POST/PUT/DELETE /api/printers`
+- `GET/POST/PUT/DELETE /api/orders`
+- `GET/POST/PUT/DELETE /api/products` (blueprints/BOM)
+- `GET/POST/PUT/DELETE /api/maintenance`
+- `GET /api/reports/financial`
+- `GET/PUT /api/settings`
+- `POST /api/calculator/compute` — accepts print params, returns cost breakdown
+
+Use JWT middleware for protected routes. CORS enabled for dev.
+
+---
+
+### 🗃️ Database Schema (H2 or SQLite embedded)
+
+Tables: `users`, `filaments`, `printers`, `orders`, `order_items`, `products`, `product_components`, `maintenance_tasks`, `settings`, `packaging_options`
+
+Auto-create schema on startup. Seed with demo data (the values shown in the screenshots) on first run.
+
+---
+
+### 📁 Project Structure
+
+```
+/
+├── package.json          ← root, single "start" script
+├── client/               ← React frontend (Vite)
+│   ├── package.json
+│   └── src/
+│       ├── pages/
+│       ├── components/
+│       ├── i18n/         ← en.json + pt.json translations
+│       ├── api/          ← axios client + API calls
+│       └── App.jsx
+└── server/               ← Go backend
+    ├── main.go
+    ├── handlers/
+    ├── models/
+    ├── middleware/
+    └── db/
+```
+
+**Root `package.json` `"start"` script:**
+```json
+"scripts": {
+  "start": "cd client && npm install && npm run build && cd .. && go run ./server/main.go"
+}
+```
+
+---
+
+### ✅ Final Requirements Summary
+
+- All screens fully implemented and navigable
+- Real-time cost calculation in Calculator (frontend reactive, no API call needed for calc)
+- All text bilingual (EN/PT toggle)
+- Fully responsive (mobile + desktop)
+- JWT auth with protected routes
+- Demo data seeded on first run
+- Single `npm start` from root starts everything
+- Production-ready Go server serves React static build + API on port 8080

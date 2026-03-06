@@ -1,0 +1,27 @@
+Crie um prompt pro google antigravity desenvolver esse app que está nas imagens. É um app de planejamento para gerar o custo do produtos impressos em impressora 3d baseado nos materiais utilizados para produção.  
+O aplicativo deve ter uma interface responsiva, que funcione em dispositivos móveis e desktops.
+O aplicativo é multi-linguas (ingles e português)
+O aplicativo deve ter responsividade para web e mobile.
+Funcionalidades:
+Autenticação do usuário (login/cadastro)
+Tela inicial
+Tela de cadastro de filamento
+Tela de calculadora
+Tela de pedidos
+Tela de agenda de manutenção
+Tela de relatório financeiro
+Tela de inventário
+Tela de componentes do produto
+Tela de configurações
+
+Stack:
+React (não usar Next.js)
+Backend Go
+Banco de dados H2
+
+O design e estilo tem que seguir as imagens que eu anexei.
+O app precisa funcioanr com um único npm start pra fazer o deploy fácil
+Importantes: o comando de build tem que instalar as dependencias do frontend antes de buildar (npm install no client antes do npm run build), senão da erro de comando não encontrado.
+Deixa o Antigravity escolher as bibiliotecas que ele preferir.
+Gere um prompt bem completo que eu só colo no Antigravity e ele faz tudo.
+

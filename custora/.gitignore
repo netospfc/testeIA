@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+client/node_modules/
+dist/
+client/dist/
+
+# Databases
+*.db
+*.db-shm
+*.db-wal
+!server/estudio3d.db  # Only keep empty/seed database if needed, but usually we ignore data
+custora.db
+custora.db-shm
+custora.db-wal
+
+# OS files
+.DS_Store
+
+# Env files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Build outputs
+build/
+.cache/

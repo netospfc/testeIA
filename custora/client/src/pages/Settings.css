@@ -1,0 +1,78 @@
+.settings-section {
+    padding: var(--space-6);
+}
+
+.settings-section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-4);
+    margin-bottom: var(--space-6);
+}
+
+.settings-icon {
+    font-size: 24px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg);
+    border-radius: var(--radius);
+    flex-shrink: 0;
+}
+
+.settings-section-header h3 {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+}
+
+.settings-section-header p {
+    font-size: var(--font-size-sm);
+    margin-top: 2px;
+}
+
+.settings-field {
+    max-width: 400px;
+}
+
+.settings-input-group {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.settings-currency {
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+.settings-unit {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    white-space: nowrap;
+}
+
+.settings-hint {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    margin-top: var(--space-2);
+}
+
+.settings-footer {
+    text-align: center;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+}
+
+.settings-footer a {
+    color: var(--color-primary);
+    font-weight: 500;
+}
+
+.settings-footer a:hover {
+    text-decoration: underline;
+}

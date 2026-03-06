@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Maintenance Schedule - Estúdio Minimalista 3D</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0f0fbd",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101022",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: "Space Grotesk", sans-serif;
+        }
+        .calendar-grid {
+            grid-template-columns: repeat(7, 1fr);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-primary/20 px-6 py-3 bg-white dark:bg-background-dark sticky top-0 z-50">
+<div class="flex items-center gap-4 text-slate-900 dark:text-white">
+<div class="text-primary">
+<span class="material-symbols-outlined text-3xl">view_in_ar</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">Estúdio Minimalista 3D</h2>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Dashboard</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Inventory</a>
+<a class="text-primary text-sm font-bold border-b-2 border-primary pb-0.5" href="#">Maintenance</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Costs</a>
+</nav>
+<div class="flex gap-2 border-l border-slate-200 dark:border-primary/20 pl-6 ml-2">
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center rounded-lg h-9 px-4 bg-primary text-white text-xs font-bold leading-normal tracking-wide">
+                            PT/EN
+                        </button>
+<button class="flex items-center justify-center rounded-lg h-9 w-9 bg-slate-100 dark:bg-primary/10 text-slate-600 dark:text-slate-100 transition-colors hover:bg-slate-200 dark:hover:bg-primary/20">
+<span class="material-symbols-outlined text-xl">notifications</span>
+</button>
+<button class="flex items-center justify-center rounded-lg h-9 w-9 bg-slate-100 dark:bg-primary/10 text-slate-600 dark:text-slate-100 transition-colors hover:bg-slate-200 dark:hover:bg-primary/20">
+<span class="material-symbols-outlined text-xl">settings</span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-9 border-2 border-primary/30" data-alt="User profile avatar with abstract geometric patterns" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAto_-8XOVE970q3hd1k2wdVZb4cXDUGlwctuDEUZ2o9pwVO5NMPnaZJfGhYMI8iB-onPD9cgqTvL-rS_O0JhUMFIsOcCtqyRczOchJd_JBFUWr7yGEn-wWcH5NzqpLCpNv4MtZVlZ2GHcEsDX9Ggp9SuBkcxcH4zuw--SnWBaDhpi9s0y4ZC1flavyk--G1_TgP3NjyhKwiF1WiCzN55HHdM_H7sbCuQXSWYo01_QW26s1W5R9Sy01MIxnzN-9gYot4iQ77OgZQYQ");'></div>
+</div>
+</header>
+<main class="flex flex-col flex-1 max-w-7xl mx-auto w-full px-6 py-8">
+<!-- Page Header -->
+<div class="flex flex-wrap justify-between items-end gap-4 mb-8">
+<div class="flex flex-col gap-1">
+<h1 class="text-slate-900 dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">Maintenance Schedule</h1>
+<p class="text-slate-500 dark:text-slate-400 text-base font-normal">Track and manage 3D printer upkeep tasks to ensure peak performance.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center justify-center rounded-lg h-11 px-6 bg-slate-100 dark:bg-primary/10 text-slate-900 dark:text-white text-sm font-bold transition-all hover:bg-slate-200 dark:hover:bg-primary/20">
+<span class="material-symbols-outlined mr-2 text-lg">history</span>
+                            View Logs
+                        </button>
+<button class="flex items-center justify-center rounded-lg h-11 px-6 bg-primary text-white text-sm font-bold transition-all hover:scale-[1.02] active:scale-[0.98]">
+<span class="material-symbols-outlined mr-2 text-lg">add_task</span>
+                            Schedule Task
+                        </button>
+</div>
+</div>
+<!-- Main Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Calendar Section (Left Side) -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<div class="bg-white dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-primary/10 overflow-hidden">
+<!-- View Toggles -->
+<div class="flex border-b border-slate-200 dark:border-primary/10 px-6 bg-slate-50/50 dark:bg-slate-900/30">
+<button class="flex items-center gap-2 border-b-2 border-primary text-primary px-4 py-4 text-sm font-bold">
+<span class="material-symbols-outlined text-lg">calendar_month</span>
+                                    Calendar View
+                                </button>
+<button class="flex items-center gap-2 border-b-2 border-transparent text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 px-4 py-4 text-sm font-bold transition-colors">
+<span class="material-symbols-outlined text-lg">timeline</span>
+                                    Timeline View
+                                </button>
+</div>
+<!-- Calendar Control -->
+<div class="p-6">
+<div class="flex items-center justify-between mb-8">
+<h3 class="text-xl font-bold dark:text-white">October 2023</h3>
+<div class="flex gap-2">
+<button class="flex items-center justify-center size-10 rounded-lg border border-slate-200 dark:border-primary/20 hover:bg-slate-100 dark:hover:bg-primary/10 text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="flex items-center justify-center px-4 rounded-lg border border-slate-200 dark:border-primary/20 hover:bg-slate-100 dark:hover:bg-primary/10 text-sm font-bold">
+                                            Today
+                                        </button>
+<button class="flex items-center justify-center size-10 rounded-lg border border-slate-200 dark:border-primary/20 hover:bg-slate-100 dark:hover:bg-primary/10 text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Calendar Grid -->
+<div class="grid calendar-grid border-t border-l border-slate-200 dark:border-primary/10">
+<!-- Days Header -->
+<div class="h-10 flex items-center justify-center border-r border-b border-slate-200 dark:border-primary/10 text-xs font-bold text-slate-400 uppercase tracking-widest">Sun</div>
+<div class="h-10 flex items-center justify-center border-r border-b border-slate-200 dark:border-primary/10 text-xs font-bold text-slate-400 uppercase tracking-widest">Mon</div>
+<div class="h-10 flex items-center justify-center border-r border-b border-slate-200 dark:border-primary/10 text-xs font-bold text-slate-400 uppercase tracking-widest">Tue</div>
+<div class="h-10 flex items-center justify-center border-r border-b border-slate-200 dark:border-primary/10 text-xs font-bold text-slate-400 uppercase tracking-widest">Wed</div>
+<div class="h-10 flex items-center justify-center border-r border-b border-slate-200 dark:border-primary/10 text-xs font-bold text-slate-400 uppercase tracking-widest">Thu</div>
+<div class="h-10 flex items-center justify-center border-r border-b border-slate-200 dark:border-primary/10 text-xs font-bold text-slate-400 uppercase tracking-widest">Fri</div>
+<div class="h-10 flex items-center justify-center border-r border-b border-slate-200 dark:border-primary/10 text-xs font-bold text-slate-400 uppercase tracking-widest">Sat</div>
+<!-- Row 1 -->
+<div class="h-28 border-r border-b border-slate-200 dark:border-primary/10 p-2 opacity-30 bg-slate-50 dark:bg-slate-900/10">24</div>
+<div class="h-28 border-r border-b border-slate-200 dark:border-primary/10 p-2 opacity-30 bg-slate-50 dark:bg-slate-900/10">25</div>
+<div class="h-28 border-r border-b border-slate-200 dark:border-primary/10 p-2 opacity-30 bg-slate-50 dark:bg-slate-900/10">26</div>
+<div class="h-28 border-r border-b border-slate-200 dark:border-primary/10 p-2 opacity-30 bg-slate-50 dark:bg-slate-900/10">27</div>
+<div class="h-28 border-r border-b border-slate-200 dark:border-primary/10 p-2 opacity-30 bg-slate-50 dark:bg-slate-900/10">28</div>
+<div class="h-28 border-r border-b border-slate-200 dark:border-primary/10 p-2 opacity-30 bg-slate-50 dark:bg-slate-900/10">29</div>
+<div class="h-28 border-r border-b border-slate-200 dark:border-primary/10 p-2 opacity-30 bg-slate-50 dark:bg-slate-900/10">30</div>
+<!-- Row 2 -->
+<div class="h-28 border-r border-b border-slate-200 dark:border-primary/10 p-2 font-medium">1</div>
+<div class="h-28 border-r border-b border-slate-200 dark:border-primary/10 p-2 font-medium">2</div>
+<div class="h-28 border-r border-b border-slate-200 dark:border-primary/10 p-2 font-medium">3</div>
+<div class="h-28 border-r border-b border-slate-200 dark:border-primary/10 p-2 font-medium">4</div>
+<div class="h-28 border-r border-b border-slate-200 dark:border-primary/10 p-2 font-medium flex flex-col gap-1">
+<span>5</span>
+<div class="bg-primary/20 text-primary text-[10px] font-bold px-2 py-1 rounded truncate border border-primary/30">
+                                            Nozzle Swap
+                                        </div>
+</div>
+<div class="h-28 border-r border-b border-slate-200 dark:border-primary/10 p-2 font-medium">6</div>
+<div class="h-28 border-r border-b border-slate-200 dark:border-primary/10 p-2 font-medium">7</div>
+<!-- Row 3 -->
+<div class="h-28 border-r border-b border-slate-200 dark:border-primary/10 p-2 font-medium">8</div>
+<div class="h-28 border-r border-b border-slate-200 dark:border-primary/10 p-2 font-medium">9</div>
+<div class="h-28 border-r border-b border-slate-200 dark:border-primary/10 p-2 font-medium flex flex-col gap-1">
+<span>10</span>
+<div class="bg-amber-500/20 text-amber-500 text-[10px] font-bold px-2 py-1 rounded truncate border border-amber-500/30">
+                                            Bed Leveling
+                                        </div>
+</div>
+<div class="h-28 border-r border-b border-slate-200 dark:border-primary/10 p-2 font-medium bg-primary/10">
+<span class="bg-primary text-white size-6 flex items-center justify-center rounded-full text-xs">11</span>
+</div>
+<div class="h-28 border-r border-b border-slate-200 dark:border-primary/10 p-2 font-medium">12</div>
+<div class="h-28 border-r border-b border-slate-200 dark:border-primary/10 p-2 font-medium flex flex-col gap-1">
+<span>13</span>
+<div class="bg-slate-500/20 text-slate-500 text-[10px] font-bold px-2 py-1 rounded truncate border border-slate-500/30">
+                                            Rod Lube
+                                        </div>
+</div>
+<div class="h-28 border-r border-b border-slate-200 dark:border-primary/10 p-2 font-medium">14</div>
+<!-- Row 4 -->
+<div class="h-28 border-r border-b border-slate-200 dark:border-primary/10 p-2 font-medium">15</div>
+<div class="h-28 border-r border-b border-slate-200 dark:border-primary/10 p-2 font-medium">16</div>
+<div class="h-28 border-r border-b border-slate-200 dark:border-primary/10 p-2 font-medium">17</div>
+<div class="h-28 border-r border-b border-slate-200 dark:border-primary/10 p-2 font-medium">18</div>
+<div class="h-28 border-r border-b border-slate-200 dark:border-primary/10 p-2 font-medium">19</div>
+<div class="h-28 border-r border-b border-slate-200 dark:border-primary/10 p-2 font-medium">20</div>
+<div class="h-28 border-r border-b border-slate-200 dark:border-primary/10 p-2 font-medium">21</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Alerts & Details Section (Right Side) -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<!-- Overdue Alerts -->
+<div class="bg-white dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-primary/10 overflow-hidden shadow-xl shadow-primary/5">
+<div class="bg-red-500/10 border-b border-red-500/20 px-6 py-4 flex items-center gap-3">
+<span class="material-symbols-outlined text-red-500">warning</span>
+<h3 class="text-red-500 font-bold tracking-tight">Overdue Maintenance</h3>
+</div>
+<div class="p-4 flex flex-col gap-3">
+<div class="group flex flex-col gap-2 p-4 rounded-lg bg-red-500/5 border border-red-500/10 hover:border-red-500/30 transition-all cursor-pointer">
+<div class="flex justify-between items-start">
+<span class="text-xs font-bold text-red-500 uppercase tracking-widest">3 Days Overdue</span>
+<span class="material-symbols-outlined text-slate-400 text-lg group-hover:text-red-500">open_in_new</span>
+</div>
+<h4 class="font-bold text-slate-900 dark:text-white">Belt Tension Adjustment</h4>
+<p class="text-sm text-slate-500 dark:text-slate-400">Printer: Voron 2.4 - V012</p>
+<button class="mt-2 w-full py-2 bg-red-500 text-white rounded text-xs font-bold">Resolve Now</button>
+</div>
+<div class="group flex flex-col gap-2 p-4 rounded-lg bg-red-500/5 border border-red-500/10 hover:border-red-500/30 transition-all cursor-pointer">
+<div class="flex justify-between items-start">
+<span class="text-xs font-bold text-red-500 uppercase tracking-widest">1 Day Overdue</span>
+<span class="material-symbols-outlined text-slate-400 text-lg group-hover:text-red-500">open_in_new</span>
+</div>
+<h4 class="font-bold text-slate-900 dark:text-white">PID Tuning</h4>
+<p class="text-sm text-slate-500 dark:text-slate-400">Printer: Bambu X1C - B001</p>
+</div>
+</div>
+</div>
+<!-- Today's Checklist -->
+<div class="bg-white dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-primary/10 p-6">
+<h3 class="text-lg font-bold mb-6 dark:text-white">Next Scheduled Tasks</h3>
+<div class="flex flex-col gap-6">
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="size-2.5 rounded-full bg-primary mt-1.5"></div>
+<div class="w-px h-full bg-slate-200 dark:bg-primary/20 my-1"></div>
+</div>
+<div class="flex-1">
+<p class="text-xs font-bold text-primary mb-1">Today • 14:00</p>
+<h4 class="font-bold dark:text-white">Z-Axis Lubrication</h4>
+<p class="text-sm text-slate-500">Prusa MK4 - Unit 4</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="size-2.5 rounded-full bg-slate-300 dark:bg-slate-700 mt-1.5"></div>
+<div class="w-px h-full bg-slate-200 dark:bg-primary/20 my-1"></div>
+</div>
+<div class="flex-1">
+<p class="text-xs font-bold text-slate-400 mb-1">Tomorrow • 09:30</p>
+<h4 class="font-bold dark:text-slate-300">Clean Build Plate PEI</h4>
+<p class="text-sm text-slate-500">All Active Units</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex flex-col items-center">
+<div class="size-2.5 rounded-full bg-slate-300 dark:bg-slate-700 mt-1.5"></div>
+</div>
+<div class="flex-1">
+<p class="text-xs font-bold text-slate-400 mb-1">Oct 14 • 10:00</p>
+<h4 class="font-bold dark:text-slate-300">Firmware Update</h4>
+<p class="text-sm text-slate-500">Ender 3 v3 KE</p>
+</div>
+</div>
+</div>
+<button class="mt-8 w-full border border-slate-200 dark:border-primary/20 hover:bg-slate-50 dark:hover:bg-primary/5 py-3 rounded-lg text-sm font-bold transition-colors">
+                                View Full Timeline
+                            </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Quick Info Bar -->
+<footer class="mt-auto border-t border-slate-200 dark:border-primary/20 px-6 py-4 bg-white dark:bg-background-dark">
+<div class="max-w-7xl mx-auto w-full flex flex-wrap justify-between items-center gap-4 text-xs font-medium text-slate-500 dark:text-slate-400">
+<div class="flex gap-6">
+<div class="flex items-center gap-2">
+<span class="size-2 rounded-full bg-green-500"></span>
+<span>12 Printers Online</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="size-2 rounded-full bg-amber-500"></span>
+<span>2 Pending Maintenance</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="size-2 rounded-full bg-red-500"></span>
+<span>2 Overdue Alerts</span>
+</div>
+</div>
+<div class="flex gap-4">
+<a class="hover:text-primary transition-colors" href="#">Documentation</a>
+<a class="hover:text-primary transition-colors" href="#">Support</a>
+<span>© 2023 Estúdio Minimalista 3D</span>
+</div>
+</div>
+</footer>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Estúdio Minimalista 3D - Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0f0fbd",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101022",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1a1a2e",
+                        "border-light": "#e2e2e8",
+                        "border-dark": "#2a2a3e",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"],
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                    boxShadow: {
+                        "soft": "0 4px 20px -2px rgba(0,0,0,0.05)",
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom range slider styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #0f0fbd;
+            cursor: pointer;
+            margin-top: -8px;
+            box-shadow: 0 0 0 4px rgba(15, 15, 189, 0.1);
+            transition: box-shadow 0.2s;
+        }
+
+        input[type=range]::-webkit-slider-thumb:hover {
+            box-shadow: 0 0 0 6px rgba(15, 15, 189, 0.2);
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            cursor: pointer;
+            background: #e2e2e8;
+            border-radius: 2px;
+        }
+
+        .dark input[type=range]::-webkit-slider-runnable-track {
+            background: #2a2a3e;
+        }
+
+        /* Number input spinner adjustments */
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display antialiased overflow-hidden">
+<div class="flex h-screen w-full overflow-hidden">
+<!-- Side Navigation -->
+<aside class="hidden md:flex flex-col w-64 border-r border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark h-full shrink-0 z-20">
+<div class="p-6 pb-2">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-lg bg-primary flex items-center justify-center text-white font-bold">
+<span class="material-symbols-outlined text-lg">view_in_ar</span>
+</div>
+<div>
+<h1 class="text-sm font-bold leading-none tracking-tight">Estúdio 3D</h1>
+<p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Pro Workspace</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary dark:text-white dark:bg-primary/20 group transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">calculate</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">inventory_2</span>
+<span class="text-sm font-medium">Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">architecture</span>
+<span class="text-sm font-medium">Product Architect</span>
+</a>
+<div class="pt-4 pb-2">
+<p class="px-3 text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">Management</p>
+</div>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">settings_applications</span>
+<span class="text-sm font-medium">Studio Settings</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">pie_chart</span>
+<span class="text-sm font-medium">Reports</span>
+</a>
+</nav>
+<div class="p-4 border-t border-border-light dark:border-border-dark">
+<button class="flex items-center gap-3 w-full p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/50 transition-colors text-left">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover bg-center" data-alt="Portrait of a user" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBgudorHVyRgNKHa6LWv0pFzEpS287A2FUq7GhlyBm6gghh6gEYG_HFigTB6IReZbECnYlsZG0zP2w2LP2mAYl_kHvcBQ5Qcv90ZXs9CXHsKeKGuM9OmKO_43GZX9HijgsvDiHYc0WRmj5gnb7uvvS3KKzXPH3drhdtKeDNXRHnWPDgUTbZ8ad8QtZ4R6Vyr_QT3-bEvataV1gZL8W_tdIkG8X0vvPW_-SPuuEPJccklmypKqWVWVSIECM8NF8hdicph_3ZOmDjGng')"></div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-medium text-slate-900 dark:text-white truncate">Alex Maker</p>
+<p class="text-xs text-slate-500 dark:text-slate-400 truncate">alex@print.studio</p>
+</div>
+</button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col h-full overflow-hidden bg-background-light dark:bg-background-dark relative">
+<!-- Mobile Header -->
+<div class="md:hidden flex items-center justify-between p-4 border-b border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">view_in_ar</span>
+<span class="font-bold text-slate-900 dark:text-white">Estúdio 3D</span>
+</div>
+<button class="p-2 text-slate-500">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<!-- Dashboard Content -->
+<div class="flex-1 overflow-y-auto p-4 md:p-8">
+<div class="max-w-[1400px] mx-auto h-full">
+<header class="mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+<div>
+<h2 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Calculator</h2>
+<p class="text-slate-500 dark:text-slate-400 mt-1 font-body text-sm">Real-time cost modeling &amp; margin analysis</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-800 border border-border-light dark:border-border-dark rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors shadow-sm">
+                                Reset
+                            </button>
+<button class="px-4 py-2 text-sm font-medium text-white bg-primary rounded-lg hover:bg-primary/90 transition-colors shadow-md shadow-primary/20 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">save</span>
+                                Save to Portfolio
+                            </button>
+</div>
+</header>
+<!-- 3-Column Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- Left Column: Inputs (3 cols) -->
+<div class="lg:col-span-3 space-y-6">
+<div class="bg-surface-light dark:bg-surface-dark p-5 rounded-xl border border-border-light dark:border-border-dark shadow-soft">
+<div class="flex items-center gap-2 mb-4 text-slate-900 dark:text-white">
+<span class="material-symbols-outlined text-primary">tune</span>
+<h3 class="font-semibold text-base">Parameters</h3>
+</div>
+<div class="space-y-5">
+<!-- Product Preset -->
+<div class="space-y-1.5">
+<label class="text-xs uppercase tracking-wider text-slate-500 font-semibold">Product Preset</label>
+<div class="relative">
+<select class="w-full bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg text-sm px-3 py-2.5 text-slate-700 dark:text-slate-200 focus:ring-1 focus:ring-primary focus:border-primary appearance-none font-body">
+<option>Articulated Dragon v2</option>
+<option>Phone Stand - Geometric</option>
+<option>Custom Enclosure Box</option>
+<option>Select a preset...</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-500">
+<span class="material-symbols-outlined text-lg">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Filament -->
+<div class="space-y-1.5">
+<label class="text-xs uppercase tracking-wider text-slate-500 font-semibold">Filament</label>
+<div class="relative">
+<select class="w-full bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg text-sm px-3 py-2.5 text-slate-700 dark:text-slate-200 focus:ring-1 focus:ring-primary focus:border-primary appearance-none font-body">
+<option>Silk Gold PLA (Sunlu)</option>
+<option>Matte Black PLA (Bambu)</option>
+<option>PETG Translucent (Overture)</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-500">
+<span class="material-symbols-outlined text-lg">expand_more</span>
+</div>
+</div>
+<p class="text-[10px] text-slate-400 text-right">Stock: 850g remaining</p>
+</div>
+<!-- Printer -->
+<div class="space-y-1.5">
+<label class="text-xs uppercase tracking-wider text-slate-500 font-semibold">Printer</label>
+<div class="relative">
+<select class="w-full bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg text-sm px-3 py-2.5 text-slate-700 dark:text-slate-200 focus:ring-1 focus:ring-primary focus:border-primary appearance-none font-body">
+<option>Bambu Lab X1C (350W)</option>
+<option>Prusa MK3S+ (120W)</option>
+<option>Voron 2.4 (450W)</option>
+</select>
+<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-500">
+<span class="material-symbols-outlined text-lg">expand_more</span>
+</div>
+</div>
+</div>
+<div class="h-px bg-border-light dark:bg-border-dark w-full my-4"></div>
+<!-- Time Input -->
+<div class="space-y-1.5">
+<label class="text-xs uppercase tracking-wider text-slate-500 font-semibold">Print Time</label>
+<div class="flex rounded-lg shadow-sm">
+<input class="block w-full rounded-l-lg border-border-light dark:border-border-dark border-r-0 bg-background-light dark:bg-background-dark text-slate-900 dark:text-white focus:ring-primary focus:border-primary sm:text-sm font-mono p-2.5" step="0.5" type="number" value="12.5"/>
+<span class="inline-flex items-center rounded-r-lg border border-l-0 border-border-light dark:border-border-dark bg-slate-50 dark:bg-slate-800 px-3 text-slate-500 sm:text-sm">hrs</span>
+</div>
+</div>
+<!-- Weight Input -->
+<div class="space-y-1.5">
+<label class="text-xs uppercase tracking-wider text-slate-500 font-semibold">Weight</label>
+<div class="flex rounded-lg shadow-sm">
+<input class="block w-full rounded-l-lg border-border-light dark:border-border-dark border-r-0 bg-background-light dark:bg-background-dark text-slate-900 dark:text-white focus:ring-primary focus:border-primary sm:text-sm font-mono p-2.5" type="number" value="145"/>
+<span class="inline-flex items-center rounded-r-lg border border-l-0 border-border-light dark:border-border-dark bg-slate-50 dark:bg-slate-800 px-3 text-slate-500 sm:text-sm">g</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Center Column: Breakdown (5 cols) -->
+<div class="lg:col-span-5 space-y-6">
+<div class="bg-surface-light dark:bg-surface-dark p-6 rounded-xl border border-border-light dark:border-border-dark shadow-soft min-h-[400px]">
+<div class="flex items-center gap-2 mb-6 text-slate-900 dark:text-white">
+<span class="material-symbols-outlined text-primary">receipt_long</span>
+<h3 class="font-semibold text-base">Cost Breakdown</h3>
+</div>
+<div class="space-y-5">
+<!-- Financial Row -->
+<div class="flex items-baseline text-sm group">
+<span class="text-slate-600 dark:text-slate-300 font-medium">Material Cost</span>
+<span class="flex-grow border-b border-dotted border-slate-300 dark:border-slate-600 mx-2"></span>
+<span class="font-mono text-slate-900 dark:text-white font-medium">R$ 28.45</span>
+</div>
+<!-- Financial Row -->
+<div class="flex items-baseline text-sm group">
+<span class="text-slate-600 dark:text-slate-300 font-medium">Energy Consumption</span>
+<span class="flex-grow border-b border-dotted border-slate-300 dark:border-slate-600 mx-2"></span>
+<span class="font-mono text-slate-900 dark:text-white font-medium">R$ 4.12</span>
+</div>
+<!-- Financial Row -->
+<div class="flex items-baseline text-sm group">
+<span class="text-slate-600 dark:text-slate-300 font-medium">Machine Depreciation</span>
+<span class="flex-grow border-b border-dotted border-slate-300 dark:border-slate-600 mx-2"></span>
+<span class="font-mono text-slate-900 dark:text-white font-medium">R$ 2.50</span>
+</div>
+<!-- Financial Row with Toggle -->
+<div class="flex items-center justify-between text-sm py-2">
+<div class="flex items-center gap-2">
+<span class="text-slate-600 dark:text-slate-300 font-medium">Fail Rate Buffer (5%)</span>
+<span class="material-symbols-outlined text-[16px] text-slate-400 cursor-help" title="Adds 5% to material and energy costs">help</span>
+</div>
+<span class="font-mono text-slate-900 dark:text-white font-medium">R$ 1.63</span>
+</div>
+<!-- Packaging Selector -->
+<div class="p-3 bg-background-light dark:bg-background-dark rounded-lg border border-border-light dark:border-border-dark mt-4">
+<div class="flex justify-between items-center mb-2">
+<span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Packaging</span>
+<span class="font-mono text-slate-900 dark:text-white font-medium text-sm">R$ 5.80</span>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 py-1.5 px-2 text-xs font-medium bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded text-slate-600 dark:text-slate-300 hover:border-primary transition-colors">S</button>
+<button class="flex-1 py-1.5 px-2 text-xs font-medium bg-primary text-white border border-primary rounded shadow-sm">M</button>
+<button class="flex-1 py-1.5 px-2 text-xs font-medium bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded text-slate-600 dark:text-slate-300 hover:border-primary transition-colors">L</button>
+<button class="flex-1 py-1.5 px-2 text-xs font-medium bg-white dark:bg-slate-700 border border-slate-200 dark:border-slate-600 rounded text-slate-600 dark:text-slate-300 hover:border-primary transition-colors">None</button>
+</div>
+</div>
+<!-- Subtotal -->
+<div class="pt-4 mt-2 border-t border-border-light dark:border-border-dark">
+<div class="flex items-baseline justify-between">
+<span class="text-slate-500 font-semibold text-sm">Operational Cost</span>
+<span class="font-mono text-slate-500 font-medium">R$ 42.50</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Detailed Breakdown Visual (Abstract) -->
+<div class="bg-surface-light dark:bg-surface-dark p-6 rounded-xl border border-border-light dark:border-border-dark shadow-soft">
+<h4 class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">Cost Distribution</h4>
+<div class="flex h-4 w-full rounded-full overflow-hidden">
+<div class="h-full bg-slate-800 w-[65%]" title="Material"></div>
+<div class="h-full bg-primary w-[15%]" title="Energy"></div>
+<div class="h-full bg-slate-400 w-[10%]" title="Depreciation"></div>
+<div class="h-full bg-slate-200 dark:bg-slate-600 w-[10%]" title="Packaging"></div>
+</div>
+<div class="flex gap-4 mt-3 text-[10px] text-slate-500 font-medium">
+<div class="flex items-center gap-1.5"><div class="size-2 rounded-full bg-slate-800"></div>Material</div>
+<div class="flex items-center gap-1.5"><div class="size-2 rounded-full bg-primary"></div>Energy</div>
+<div class="flex items-center gap-1.5"><div class="size-2 rounded-full bg-slate-400"></div>Machine</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Results (4 cols) - Sticky -->
+<div class="lg:col-span-4 lg:sticky lg:top-8 space-y-6">
+<div class="bg-surface-light dark:bg-surface-dark p-6 rounded-xl border border-border-light dark:border-border-dark shadow-lg shadow-slate-200/50 dark:shadow-black/20 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
+<span class="material-symbols-outlined text-[120px]">payments</span>
+</div>
+<h3 class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-1">Total Cost Base</h3>
+<p class="text-[40px] font-bold text-slate-900 dark:text-white leading-tight font-mono tracking-tight">
+                                    R$ 42,50
+                                </p>
+<div class="my-8">
+<div class="flex justify-between items-center mb-2">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-200" for="margin">Profit Margin</label>
+<span class="px-2 py-0.5 rounded bg-green-100 text-green-700 text-xs font-bold font-mono">45%</span>
+</div>
+<input class="w-full" id="margin" max="200" min="0" type="range" value="45"/>
+<div class="flex justify-between text-[10px] text-slate-400 mt-1 font-mono">
+<span>0%</span>
+<span>100%</span>
+<span>200%</span>
+</div>
+</div>
+<div class="space-y-4">
+<div class="p-4 bg-background-light dark:bg-background-dark rounded-lg border border-border-light dark:border-border-dark">
+<p class="text-xs text-slate-500 mb-1">Recommended Sale Price</p>
+<div class="flex items-center justify-between">
+<span class="text-2xl font-bold text-slate-900 dark:text-white font-mono">R$ 61,62</span>
+<span class="material-symbols-outlined text-green-500 text-lg">trending_up</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-3 bg-green-50 dark:bg-green-900/10 rounded-lg border border-green-100 dark:border-green-900/30">
+<p class="text-[10px] text-green-600 dark:text-green-400 uppercase font-bold tracking-wide mb-1">Net Profit</p>
+<p class="text-lg font-bold text-green-700 dark:text-green-400 font-mono">+R$ 19,12</p>
+</div>
+<div class="p-3 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-100 dark:border-slate-800">
+<p class="text-[10px] text-slate-500 uppercase font-bold tracking-wide mb-1">Hourly Profit</p>
+<p class="text-lg font-bold text-slate-700 dark:text-slate-300 font-mono">R$ 1,53/h</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-primary/5 border border-primary/10 p-4 rounded-xl flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5">lightbulb</span>
+<div>
+<h4 class="text-sm font-bold text-slate-900 dark:text-white">Pricing Tip</h4>
+<p class="text-xs text-slate-600 dark:text-slate-300 mt-1 leading-relaxed">
+                                        Based on your printer's depreciation, a margin below 30% is not recommended for prints over 10 hours.
+                                    </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

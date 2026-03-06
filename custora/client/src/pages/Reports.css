@@ -1,0 +1,50 @@
+.pie-container {
+    position: relative;
+}
+
+.pie-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    pointer-events: none;
+}
+
+.pie-total-label {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.pie-total-value {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+}
+
+.legend-items {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-5);
+    margin-top: var(--space-4);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--font-size-sm);
+}
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 3px;
+    flex-shrink: 0;
+}
+
+.legend-pct {
+    font-weight: 600;
+    color: var(--color-text-secondary);
+}

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Estúdio 3D - Inventário</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#0f0fbd",
+              "background-light": "#f6f6f8",
+              "background-dark": "#101022",
+              "surface": "#ffffff",
+              "border": "#e5e7eb",
+              "text-main": "#0d0d1b",
+              "text-muted": "#4c4c9a",
+            },
+            fontFamily: {
+              "display": ["Space Grotesk", "sans-serif"],
+              "sans": ["Inter", "sans-serif"],
+              "mono": ["JetBrains Mono", "monospace"],
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            boxShadow: {
+                "card": "0 2px 12px rgba(0,0,0,0.04)"
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-sans text-text-main antialiased selection:bg-primary/20 selection:text-primary overflow-hidden">
+<div class="flex h-screen w-full flex-col">
+<!-- TopNavBar (Reused & Adapted) -->
+<header class="flex flex-none items-center justify-between whitespace-nowrap border-b border-solid border-border bg-background-light dark:bg-background-dark px-6 py-3 z-20">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-text-main">
+<div class="flex items-center justify-center size-8 bg-primary rounded-lg text-white">
+<span class="material-symbols-outlined text-xl">view_in_ar</span>
+</div>
+<h2 class="text-text-main font-display text-lg font-bold leading-tight tracking-tight">Estúdio 3D</h2>
+</div>
+<!-- Navigation Links (Desktop) -->
+<nav class="hidden md:flex items-center gap-6 ml-4">
+<a class="text-text-muted hover:text-primary transition-colors text-sm font-medium" href="#">Dashboard</a>
+<a class="text-primary text-sm font-medium" href="#">Inventário</a>
+<a class="text-text-muted hover:text-primary transition-colors text-sm font-medium" href="#">Produtos</a>
+<a class="text-text-muted hover:text-primary transition-colors text-sm font-medium" href="#">Relatórios</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex items-center bg-white border border-border rounded-lg h-9 px-3 w-64 focus-within:border-primary focus-within:ring-1 focus-within:ring-primary transition-all shadow-sm">
+<span class="material-symbols-outlined text-text-muted text-[20px]">search</span>
+<input class="w-full bg-transparent border-none text-sm text-text-main placeholder:text-text-muted focus:ring-0 ml-2 h-full py-0" placeholder="Buscar filamento ou impressora..."/>
+</div>
+<button class="relative p-2 text-text-muted hover:text-primary transition-colors rounded-full hover:bg-black/5">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-background-light"></span>
+</button>
+<div class="size-9 rounded-full bg-gray-200 bg-cover bg-center border border-border" data-alt="User profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA5jGHNkR3rjBAQCb0qizYAJCndFyfHr9L3P3XK5gEkPNn5VtMU3QHGHKG6V1733mBlDjqRtnMKRildX7KUgFPO_YGtFc5ojmxlkn07aZ5gAA8HLkg_KV-jEV8ZtLl4P8Pc_JLakuWbgfl1MCx2K2eQ-DyotmrV9qqOiG6okMVdYo7tOxMWEcE8smCPJs0aE8oLiR7CzMhIXblZGPFhOVZ2Fpl5yxcry8PG-4Pb99C0aroWfCcbT70BtK9rLH2f_aqPjvt9RkGP3TI");'></div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 flex overflow-hidden relative">
+<!-- Content Scrollable Area -->
+<div class="flex-1 overflow-y-auto overflow-x-hidden p-6 md:p-10">
+<div class="max-w-7xl mx-auto flex flex-col gap-8">
+<!-- Page Header & Actions -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="flex flex-col gap-1">
+<h1 class="font-display text-3xl font-bold text-text-main tracking-tight">Inventário</h1>
+<p class="text-text-muted text-sm">Gerencie seus materiais e equipamentos de produção.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="hidden sm:flex items-center justify-center gap-2 h-10 px-4 bg-white border border-border rounded-lg text-text-main text-sm font-medium hover:bg-gray-50 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[20px]">download</span>
+                                Exportar
+                            </button>
+<button class="flex items-center justify-center gap-2 h-10 px-4 bg-primary text-white rounded-lg text-sm font-bold shadow-md hover:bg-primary/90 transition-all active:scale-95">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                                Novo Item
+                            </button>
+</div>
+</div>
+<!-- Tabs -->
+<div class="border-b border-border w-full">
+<div class="flex gap-8">
+<button class="group flex items-center gap-2 pb-3 border-b-2 border-primary px-1">
+<span class="material-symbols-outlined text-primary text-[20px]">fiber_smart_record</span>
+<span class="text-primary font-bold text-sm">Filamentos</span>
+</button>
+<button class="group flex items-center gap-2 pb-3 border-b-2 border-transparent hover:border-border transition-all px-1">
+<span class="material-symbols-outlined text-text-muted group-hover:text-text-main text-[20px]">print</span>
+<span class="text-text-muted group-hover:text-text-main font-medium text-sm">Impressoras</span>
+</button>
+</div>
+</div>
+<!-- Tab Content: Filaments (Active) -->
+<div class="flex flex-col gap-6 animate-fade-in">
+<!-- Filters Bar -->
+<div class="flex flex-wrap items-center gap-3 py-2">
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-semibold border border-primary/20">
+                                Todos
+                            </button>
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white text-text-muted text-xs font-medium border border-border hover:border-primary/50 transition-colors shadow-sm">
+                                PLA <span class="bg-gray-100 text-gray-600 text-[10px] px-1.5 py-0.5 rounded ml-1">12</span>
+</button>
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white text-text-muted text-xs font-medium border border-border hover:border-primary/50 transition-colors shadow-sm">
+                                PETG <span class="bg-gray-100 text-gray-600 text-[10px] px-1.5 py-0.5 rounded ml-1">8</span>
+</button>
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white text-text-muted text-xs font-medium border border-border hover:border-primary/50 transition-colors shadow-sm">
+                                ABS <span class="bg-gray-100 text-gray-600 text-[10px] px-1.5 py-0.5 rounded ml-1">4</span>
+</button>
+<div class="flex-1"></div>
+<div class="flex items-center text-xs text-text-muted">
+<span class="font-mono font-medium text-text-main mr-1">24</span> itens encontrados
+                            </div>
+</div>
+<!-- Data Grid -->
+<div class="bg-white border border-border rounded-xl shadow-card overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-gray-50/50 border-b border-border text-xs uppercase tracking-wider text-text-muted font-medium">
+<th class="px-6 py-4 font-sans w-16">Status</th>
+<th class="px-6 py-4 font-sans">Material / Cor</th>
+<th class="px-6 py-4 font-sans">Fabricante</th>
+<th class="px-6 py-4 font-sans">Tipo</th>
+<th class="px-6 py-4 font-sans w-1/4">Estoque Restante</th>
+<th class="px-6 py-4 font-sans text-right">Custo / kg</th>
+<th class="px-6 py-4 font-sans w-16"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border text-sm">
+<!-- Row 1 -->
+<tr class="group hover:bg-gray-50 transition-colors cursor-pointer">
+<td class="px-6 py-4">
+<div class="size-2.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.4)]"></div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-md shadow-sm border border-black/10" style="background-color: #FACC15;" title="Silk Gold"></div>
+<div>
+<p class="font-medium text-text-main font-display">Silk Gold</p>
+<p class="text-xs text-text-muted">SKU: PL-GD-001</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-text-main">PolyLite</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
+                                                    PLA
+                                                </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col gap-1.5">
+<div class="flex justify-between text-xs">
+<span class="font-mono text-text-main">750g</span>
+<span class="text-text-muted">1000g</span>
+</div>
+<div class="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 75%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-right font-mono text-text-main">R$ 140,00</td>
+<td class="px-6 py-4 text-right">
+<button class="text-text-muted hover:text-primary p-1 rounded hover:bg-primary/5 transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-gray-50 transition-colors cursor-pointer">
+<td class="px-6 py-4">
+<div class="size-2.5 rounded-full bg-amber-500 shadow-[0_0_8px_rgba(245,158,11,0.4)]"></div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-md shadow-sm border border-black/10" style="background-color: #1F2937;" title="Matte Black"></div>
+<div>
+<p class="font-medium text-text-main font-display">Matte Black</p>
+<p class="text-xs text-text-muted">SKU: PL-BK-042</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-text-main">Creality</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
+                                                    PLA
+                                                </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col gap-1.5">
+<div class="flex justify-between text-xs">
+<span class="font-mono text-text-main">120g</span>
+<span class="text-text-muted">1000g</span>
+</div>
+<div class="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+<div class="h-full bg-amber-500 rounded-full" style="width: 12%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-right font-mono text-text-main">R$ 115,90</td>
+<td class="px-6 py-4 text-right">
+<button class="text-text-muted hover:text-primary p-1 rounded hover:bg-primary/5 transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="group hover:bg-gray-50 transition-colors cursor-pointer">
+<td class="px-6 py-4">
+<div class="size-2.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.4)]"></div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-md shadow-sm border border-black/10" style="background-color: #EF4444;" title="Standard Red"></div>
+<div>
+<p class="font-medium text-text-main font-display">Standard Red</p>
+<p class="text-xs text-text-muted">SKU: PT-RD-112</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-text-main">Voolt3D</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-purple-50 text-purple-700 border border-purple-100">
+                                                    PETG
+                                                </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col gap-1.5">
+<div class="flex justify-between text-xs">
+<span class="font-mono text-text-main">890g</span>
+<span class="text-text-muted">1000g</span>
+</div>
+<div class="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 89%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-right font-mono text-text-main">R$ 98,50</td>
+<td class="px-6 py-4 text-right">
+<button class="text-text-muted hover:text-primary p-1 rounded hover:bg-primary/5 transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="group hover:bg-gray-50 transition-colors cursor-pointer">
+<td class="px-6 py-4">
+<div class="size-2.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.4)]"></div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-md shadow-sm border border-black/10" style="background-color: #FFFFFF;" title="Cool White"></div>
+<div>
+<p class="font-medium text-text-main font-display">Cool White</p>
+<p class="text-xs text-text-muted">SKU: AB-WT-005</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-text-main">Esun</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-orange-50 text-orange-700 border border-orange-100">
+                                                    ABS
+                                                </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col gap-1.5">
+<div class="flex justify-between text-xs">
+<span class="font-mono text-text-main">450g</span>
+<span class="text-text-muted">1000g</span>
+</div>
+<div class="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 45%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-right font-mono text-text-main">R$ 85,00</td>
+<td class="px-6 py-4 text-right">
+<button class="text-text-muted hover:text-primary p-1 rounded hover:bg-primary/5 transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="group hover:bg-gray-50 transition-colors cursor-pointer">
+<td class="px-6 py-4">
+<div class="size-2.5 rounded-full bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.4)]"></div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-md shadow-sm border border-black/10" style="background-color: #6366F1;" title="Galaxy Purple"></div>
+<div>
+<p class="font-medium text-text-main font-display">Galaxy Purple</p>
+<p class="text-xs text-text-muted">SKU: PL-GP-882</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-text-main">Prusament</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded text-xs font-medium bg-blue-50 text-blue-700 border border-blue-100">
+                                                    PLA
+                                                </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col gap-1.5">
+<div class="flex justify-between text-xs">
+<span class="font-mono text-text-main">15g</span>
+<span class="text-text-muted">1000g</span>
+</div>
+<div class="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+<div class="h-full bg-red-500 rounded-full" style="width: 1.5%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 text-right font-mono text-text-main">R$ 180,00</td>
+<td class="px-6 py-4 text-right">
+<button class="text-text-muted hover:text-primary p-1 rounded hover:bg-primary/5 transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="flex items-center justify-between px-6 py-3 border-t border-border bg-gray-50/50">
+<span class="text-xs text-text-muted">Mostrando 1-5 de 24</span>
+<div class="flex gap-2">
+<button class="p-1 rounded text-text-muted hover:text-text-main hover:bg-white border border-transparent hover:border-border transition-all disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="p-1 rounded text-text-muted hover:text-text-main hover:bg-white border border-transparent hover:border-border transition-all">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Side Sheet Drawer -->
+<aside class="absolute inset-y-0 right-0 w-[400px] bg-white shadow-2xl border-l border-border transform transition-transform duration-300 ease-in-out z-30 flex flex-col">
+<div class="flex items-center justify-between px-6 py-5 border-b border-border bg-gray-50/50">
+<h3 class="text-lg font-bold font-display text-text-main">Editar Filamento</h3>
+<button class="text-text-muted hover:text-text-main p-1 rounded hover:bg-gray-200 transition-colors">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto p-6 space-y-6">
+<!-- Quick Stats -->
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-gray-50 p-4 rounded-lg border border-border">
+<p class="text-xs text-text-muted font-medium mb-1 uppercase tracking-wide">Custo Total</p>
+<p class="text-2xl font-bold text-text-main font-mono tracking-tight">R$ 140,00</p>
+</div>
+<div class="bg-gray-50 p-4 rounded-lg border border-border">
+<p class="text-xs text-text-muted font-medium mb-1 uppercase tracking-wide">Custo / g</p>
+<p class="text-2xl font-bold text-text-main font-mono tracking-tight">R$ 0,14</p>
+</div>
+</div>
+<!-- Form -->
+<div class="space-y-4">
+<label class="block">
+<span class="text-sm font-medium text-text-main mb-1.5 block">Nome do Material</span>
+<input class="w-full rounded-lg border-border bg-background-light text-text-main text-sm focus:border-primary focus:ring-primary" type="text" value="Silk Gold PLA"/>
+</label>
+<div class="grid grid-cols-2 gap-4">
+<label class="block">
+<span class="text-sm font-medium text-text-main mb-1.5 block">Fabricante</span>
+<input class="w-full rounded-lg border-border bg-background-light text-text-main text-sm focus:border-primary focus:ring-primary" type="text" value="PolyLite"/>
+</label>
+<label class="block">
+<span class="text-sm font-medium text-text-main mb-1.5 block">Tipo</span>
+<select class="w-full rounded-lg border-border bg-background-light text-text-main text-sm focus:border-primary focus:ring-primary">
+<option>PLA</option>
+<option>PETG</option>
+<option>ABS</option>
+<option>TPU</option>
+</select>
+</label>
+</div>
+<label class="block">
+<span class="text-sm font-medium text-text-main mb-1.5 block">Cor Hex</span>
+<div class="flex gap-2">
+<div class="size-10 rounded border border-border shadow-sm flex-none" style="background-color: #FACC15;"></div>
+<input class="flex-1 rounded-lg border-border bg-background-light text-text-main text-sm font-mono focus:border-primary focus:ring-primary" type="text" value="#FACC15"/>
+</div>
+</label>
+<hr class="border-border my-2"/>
+<div class="grid grid-cols-2 gap-4">
+<label class="block">
+<span class="text-sm font-medium text-text-main mb-1.5 block">Peso Inicial (g)</span>
+<input class="w-full rounded-lg border-border bg-background-light text-text-main text-sm font-mono focus:border-primary focus:ring-primary" type="number" value="1000"/>
+</label>
+<label class="block">
+<span class="text-sm font-medium text-text-main mb-1.5 block">Preço Pago (R$)</span>
+<input class="w-full rounded-lg border-border bg-background-light text-text-main text-sm font-mono focus:border-primary focus:ring-primary" type="number" value="140.00"/>
+</label>
+</div>
+<label class="block">
+<span class="text-sm font-medium text-text-main mb-1.5 block">Data da Compra</span>
+<input class="w-full rounded-lg border-border bg-background-light text-text-main text-sm focus:border-primary focus:ring-primary" type="date" value="2023-10-15"/>
+</label>
+<div class="pt-2">
+<label class="block">
+<span class="text-sm font-medium text-text-main mb-1.5 block">Notas</span>
+<textarea class="w-full rounded-lg border-border bg-background-light text-text-main text-sm focus:border-primary focus:ring-primary resize-none h-24" placeholder="Detalhes adicionais..."></textarea>
+</label>
+</div>
+</div>
+</div>
+<div class="p-6 border-t border-border bg-gray-50/50 flex gap-3">
+<button class="flex-1 px-4 py-2 border border-border bg-white text-text-main rounded-lg text-sm font-semibold hover:bg-gray-50 transition-colors">Cancelar</button>
+<button class="flex-1 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold hover:bg-primary/90 transition-colors shadow-sm">Salvar Alterações</button>
+</div>
+</aside>
+<!-- Backdrop for Drawer (Optional, adds focus) -->
+<div class="absolute inset-0 bg-black/5 z-20 pointer-events-none"></div>
+</main>
+</div>
+</body></html>

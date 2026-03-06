@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Estúdio Minimalista 3D - Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1A1A1A",
+                        "background-light": "#F9FAFB",
+                        "background-dark": "#111827",
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#1F2937",
+                        "border-light": "#E5E7EB",
+                        "border-dark": "#374151",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"],
+                    },
+                    borderRadius: { "DEFAULT": "6px", "lg": "8px", "xl": "12px", "full": "9999px" },
+                    boxShadow: {
+                        "soft": "0 2px 12px rgba(0,0,0,0.04)",
+                    }
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer base {
+            input[type=range] {
+                -webkit-appearance: none;
+                width: 100%;
+                background: transparent;
+            }
+            input[type=range]::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                height: 18px;
+                width: 18px;
+                border-radius: 50%;
+                background: #10B981;
+                cursor: pointer;
+                margin-top: -7px;
+                border: 2px solid white;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            }
+            input[type=range]::-webkit-slider-runnable-track {
+                width: 100%;
+                height: 4px;
+                cursor: pointer;
+                background: #E5E7EB;
+                border-radius: 2px;
+            }
+            .dark input[type=range]::-webkit-slider-runnable-track {
+                background: #374151;
+            }
+        }
+        .tooltip-trigger:hover .tooltip-content {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-body antialiased overflow-hidden">
+<div class="flex h-screen w-full overflow-hidden">
+<aside class="hidden md:flex flex-col w-64 border-r border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark h-full shrink-0 z-20">
+<div class="p-6 pb-2">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-md bg-primary flex items-center justify-center text-white font-bold">
+<span class="material-symbols-outlined text-lg">view_in_ar</span>
+</div>
+<div>
+<h1 class="text-sm font-bold leading-none tracking-tight font-display">ESTÚDIO 3D</h1>
+<p class="text-[10px] text-slate-400 uppercase tracking-widest mt-1">Minimalist Studio</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
+<a class="flex items-center gap-3 px-3 py-2 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">calculate</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-md text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">inventory_2</span>
+<span class="text-sm font-medium">Inventory <span class="text-[10px] opacity-50 ml-1">(Estoque)</span></span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-md text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">architecture</span>
+<span class="text-sm font-medium">Product Architect</span>
+</a>
+<div class="pt-6 pb-2">
+<p class="px-3 text-[10px] font-bold text-slate-400 uppercase tracking-wider">Studio Management</p>
+</div>
+<a class="flex items-center gap-3 px-3 py-2 rounded-md text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="text-sm font-medium">Settings <span class="text-[10px] opacity-50 ml-1">(Ajustes)</span></span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-md text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">query_stats</span>
+<span class="text-sm font-medium">Financial Reports</span>
+</a>
+</nav>
+<div class="p-4 border-t border-border-light dark:border-border-dark">
+<div class="flex items-center gap-3 p-2">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBgudorHVyRgNKHa6LWv0pFzEpS287A2FUq7GhlyBm6gghh6gEYG_HFigTB6IReZbECnYlsZG0zP2w2LP2mAYl_kHvcBQ5Qcv90ZXs9CXHsKeKGuM9OmKO_43GZX9HijgsvDiHYc0WRmj5gnb7uvvS3KKzXPH3drhdtKeDNXRHnWPDgUTbZ8ad8QtZ4R6Vyr_QT3-bEvataV1gZL8W_tdIkG8X0vvPW_-SPuuEPJccklmypKqWVWVSIECM8NF8hdicph_3ZOmDjGng')"></div>
+<div class="flex-1 min-w-0">
+<p class="text-xs font-semibold text-slate-900 dark:text-white truncate">Alex Maker</p>
+<p class="text-[10px] text-slate-500 truncate uppercase tracking-tighter">Pro Plan</p>
+</div>
+</div>
+</div>
+</aside>
+<main class="flex-1 flex flex-col h-full overflow-hidden bg-background-light dark:bg-background-dark">
+<header class="h-16 border-b border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark flex items-center justify-between px-6 shrink-0 z-10">
+<div class="flex items-center gap-4">
+<h2 class="font-display font-semibold text-lg">Calculator <span class="text-slate-400 font-normal">/ Dashboard</span></h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center bg-slate-100 dark:bg-slate-800 p-1 rounded-md border border-border-light dark:border-border-dark">
+<button class="px-2.5 py-1 text-[10px] font-bold rounded transition-all bg-white dark:bg-slate-700 shadow-sm text-slate-900 dark:text-white">EN</button>
+<button class="px-2.5 py-1 text-[10px] font-bold rounded transition-all text-slate-400 hover:text-slate-600 dark:hover:text-slate-300">PT</button>
+</div>
+<div class="h-4 w-px bg-border-light dark:bg-border-dark"></div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+<span class="material-symbols-outlined text-xl">notifications</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+<span class="material-symbols-outlined text-xl">help</span>
+</button>
+</div>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto p-8">
+<div class="max-w-7xl mx-auto">
+<div class="mb-8 flex items-end justify-between">
+<div>
+<h2 class="text-2xl font-display font-bold text-slate-900 dark:text-white">Cost Modeling</h2>
+<p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Real-time precision financial analysis for your 3D farm.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 text-sm font-medium border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark rounded-md hover:bg-slate-50 transition-colors">Reset</button>
+<button class="px-4 py-2 text-sm font-medium bg-primary text-white rounded-md hover:opacity-90 transition-opacity flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">add</span>
+                            New Calculation
+                        </button>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<div class="lg:col-span-3 space-y-6">
+<div class="bg-surface-light dark:bg-surface-dark p-6 rounded-md border border-border-light dark:border-border-dark shadow-soft">
+<h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-6">Input Parameters</h3>
+<div class="space-y-6">
+<div class="space-y-1.5">
+<label class="text-[11px] font-bold text-slate-500 uppercase flex items-center gap-1">
+                                        Product Preset
+                                        <div class="group relative inline-block tooltip-trigger">
+<span class="material-symbols-outlined text-xs cursor-help text-slate-300">info</span>
+<div class="invisible group-hover:visible absolute z-20 w-48 p-2 mt-1 -left-1 bg-slate-800 text-white text-[10px] rounded shadow-lg opacity-0 transition-opacity tooltip-content">
+                                                Select a saved BOM (Bill of Materials) configuration.
+                                                <div class="mt-1 pt-1 border-t border-slate-600 text-slate-400">PT: Selecione uma configuração salva.</div>
+</div>
+</div>
+</label>
+<select class="w-full bg-slate-50 dark:bg-slate-800 border-border-light dark:border-border-dark rounded-md text-sm py-2 focus:ring-1 focus:ring-slate-400">
+<option>Articulated Dragon v2</option>
+<option>Mechanical Case Mini</option>
+</select>
+</div>
+<div class="space-y-1.5">
+<label class="text-[11px] font-bold text-slate-500 uppercase">Filament (Filamento)</label>
+<select class="w-full bg-slate-50 dark:bg-slate-800 border-border-light dark:border-border-dark rounded-md text-sm py-2 focus:ring-1 focus:ring-slate-400">
+<option>Silk Gold PLA (Sunlu)</option>
+<option>PETG Black (Bambu)</option>
+</select>
+</div>
+<div class="space-y-1.5">
+<label class="text-[11px] font-bold text-slate-500 uppercase">Hardware / Printer</label>
+<select class="w-full bg-slate-50 dark:bg-slate-800 border-border-light dark:border-border-dark rounded-md text-sm py-2 focus:ring-1 focus:ring-slate-400">
+<option>Bambu Lab X1C (350W)</option>
+<option>Prusa MK3S+ (120W)</option>
+</select>
+</div>
+<div class="h-px bg-border-light dark:bg-border-dark"></div>
+<div class="grid grid-cols-1 gap-4">
+<div class="space-y-1.5">
+<label class="text-[11px] font-bold text-slate-500 uppercase">Print Time (Tempo)</label>
+<div class="relative">
+<input class="w-full bg-slate-50 dark:bg-slate-800 border-border-light dark:border-border-dark rounded-md text-sm py-2 pr-10 font-mono" type="number" value="12.5"/>
+<span class="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] text-slate-400 font-bold uppercase">hrs</span>
+</div>
+</div>
+<div class="space-y-1.5">
+<label class="text-[11px] font-bold text-slate-500 uppercase">Net Weight (Peso)</label>
+<div class="relative">
+<input class="w-full bg-slate-50 dark:bg-slate-800 border-border-light dark:border-border-dark rounded-md text-sm py-2 pr-10 font-mono" type="number" value="145"/>
+<span class="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] text-slate-400 font-bold uppercase">g</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-5 space-y-6">
+<div class="bg-surface-light dark:bg-surface-dark p-8 rounded-md border border-border-light dark:border-border-dark shadow-soft">
+<h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-8">Cost Breakdown (Detalhamento)</h3>
+<div class="space-y-6">
+<div class="flex items-baseline group">
+<div class="flex items-center gap-2">
+<span class="text-sm font-medium text-slate-700 dark:text-slate-300">Material Cost</span>
+<span class="text-[10px] text-slate-400 italic">(Custo Material)</span>
+</div>
+<span class="flex-grow border-b border-dotted border-slate-200 dark:border-slate-700 mx-2"></span>
+<span class="font-mono text-sm font-semibold tracking-tight text-slate-900 dark:text-white">R$ 28.45</span>
+</div>
+<div class="flex items-baseline group">
+<div class="flex items-center gap-2">
+<span class="text-sm font-medium text-slate-700 dark:text-slate-300">Energy Consumption</span>
+<span class="text-[10px] text-slate-400 italic group-hover:text-slate-500 transition-colors">⚡</span>
+</div>
+<span class="flex-grow border-b border-dotted border-slate-200 dark:border-slate-700 mx-2"></span>
+<span class="font-mono text-sm font-semibold tracking-tight text-slate-900 dark:text-white">R$ 4.12</span>
+</div>
+<div class="flex items-baseline group">
+<span class="text-sm font-medium text-slate-700 dark:text-slate-300">Machine Depreciation</span>
+<span class="flex-grow border-b border-dotted border-slate-200 dark:border-slate-700 mx-2"></span>
+<span class="font-mono text-sm font-semibold tracking-tight text-slate-900 dark:text-white">R$ 2.50</span>
+</div>
+<div class="flex items-baseline group">
+<div class="flex items-center gap-1">
+<span class="text-sm font-medium text-slate-700 dark:text-slate-300">Buffer / Fail Margin</span>
+<span class="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-[10px] text-slate-500 font-bold">5%</span>
+</div>
+<span class="flex-grow border-b border-dotted border-slate-200 dark:border-slate-700 mx-2"></span>
+<span class="font-mono text-sm font-semibold tracking-tight text-slate-900 dark:text-white">R$ 1.63</span>
+</div>
+<div class="mt-4 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-md border border-border-light dark:border-border-dark">
+<div class="flex justify-between items-center mb-3">
+<span class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Packaging / Insumos</span>
+<span class="font-mono text-xs font-semibold">R$ 5.80</span>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 py-2 text-[10px] font-bold border border-border-light dark:border-border-dark rounded bg-white dark:bg-slate-800 hover:border-slate-400 transition-colors">SMALL</button>
+<button class="flex-1 py-2 text-[10px] font-bold border border-primary bg-primary text-white rounded">MEDIUM</button>
+<button class="flex-1 py-2 text-[10px] font-bold border border-border-light dark:border-border-dark rounded bg-white dark:bg-slate-800 hover:border-slate-400 transition-colors">LARGE</button>
+</div>
+</div>
+<div class="pt-8 border-t border-border-light dark:border-border-dark">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-[11px] font-bold uppercase tracking-widest text-slate-400">Total Base Cost</span>
+<span class="text-[10px] text-slate-400">(Custo Operacional Total)</span>
+</div>
+<span class="text-2xl font-display font-bold text-slate-900 dark:text-white font-mono tracking-tighter">R$ 42.50</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-4 lg:sticky lg:top-8 space-y-6">
+<div class="bg-surface-light dark:bg-surface-dark p-8 rounded-md border border-border-light dark:border-border-dark shadow-xl shadow-slate-200/40 dark:shadow-none">
+<h3 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-6">Price Strategy</h3>
+<div class="space-y-8">
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<label class="text-sm font-semibold text-slate-700 dark:text-slate-300">Profit Margin (Margem)</label>
+<span class="text-2xl font-mono font-bold text-emerald-500">45%</span>
+</div>
+<input class="w-full accent-emerald-500" max="200" min="0" type="range" value="45"/>
+<div class="flex justify-between font-mono text-[10px] text-slate-400">
+<span>0%</span>
+<span>100%</span>
+<span>200%</span>
+</div>
+</div>
+<div class="h-px bg-border-light dark:bg-border-dark"></div>
+<div class="space-y-4">
+<div class="p-6 bg-slate-50 dark:bg-slate-800/80 rounded-md border border-border-light dark:border-border-dark">
+<p class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">Recommended Sale Price</p>
+<div class="flex items-center justify-between">
+<span class="text-3xl font-mono font-bold text-slate-900 dark:text-white tracking-tighter">R$ 61.62</span>
+<div class="p-1.5 rounded bg-emerald-100 text-emerald-600">
+<span class="material-symbols-outlined text-lg">trending_up</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-4 bg-emerald-50/50 dark:bg-emerald-900/10 rounded-md border border-emerald-100 dark:border-emerald-900/20">
+<p class="text-[9px] font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-widest mb-1">Net Profit</p>
+<p class="text-lg font-mono font-bold text-emerald-700 dark:text-emerald-400">+R$ 19.12</p>
+</div>
+<div class="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-md border border-border-light dark:border-border-dark">
+<p class="text-[9px] font-bold text-slate-500 uppercase tracking-widest mb-1">Hourly Profit</p>
+<p class="text-lg font-mono font-bold text-slate-700 dark:text-slate-300">R$ 1.53/h</p>
+</div>
+</div>
+</div>
+<button class="w-full py-4 bg-primary text-white text-xs font-bold uppercase tracking-widest rounded-md hover:bg-slate-800 transition-colors shadow-lg shadow-slate-200 dark:shadow-none">
+                                    Save to Portfolio (Salvar)
+                                </button>
+</div>
+</div>
+<div class="p-4 bg-slate-100 dark:bg-slate-800/40 rounded-md flex gap-4">
+<span class="material-symbols-outlined text-slate-400">lightbulb</span>
+<div>
+<p class="text-xs font-bold text-slate-800 dark:text-slate-200">Efficiency Insight</p>
+<p class="text-[11px] text-slate-500 mt-1 leading-relaxed">
+                                    Margins over 40% are healthy for prototype work. <br/>
+<span class="italic opacity-70">PT: Margens acima de 40% são ideais para prototipagem.</span>
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+</body></html>

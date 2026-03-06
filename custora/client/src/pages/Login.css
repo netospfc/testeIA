@@ -1,0 +1,146 @@
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg);
+    position: relative;
+    overflow: hidden;
+}
+
+.login-bg-pattern {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, var(--color-border) 1px, transparent 1px);
+    background-size: 24px 24px;
+    opacity: 0.5;
+}
+
+.login-card {
+    position: relative;
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--color-border-light);
+    padding: var(--space-10);
+    width: 420px;
+    max-width: 90vw;
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: var(--space-8);
+}
+
+.login-logo {
+    width: 56px;
+    height: 56px;
+    background: var(--color-primary);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto var(--space-4);
+    color: white;
+}
+
+.login-logo .material-icons-outlined {
+    font-size: 28px;
+}
+
+.login-header h1 {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--color-text);
+    margin-bottom: var(--space-1);
+}
+
+.login-header p {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    letter-spacing: 0.02em;
+}
+
+.login-btn {
+    margin-top: var(--space-4);
+    padding: var(--space-4);
+    font-size: var(--font-size-base);
+}
+
+.login-error {
+    background: var(--color-error-bg);
+    color: var(--color-error);
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--space-4);
+}
+
+.login-footer-link {
+    text-align: center;
+    margin-top: var(--space-6);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+}
+
+.login-footer-link button {
+    background: none;
+    border: none;
+    color: var(--color-primary);
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+}
+
+.login-footer-link button:hover {
+    text-decoration: underline;
+}
+
+.login-version {
+    text-align: center;
+    margin-top: var(--space-8);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    letter-spacing: 0.04em;
+}
+
+.login-sys {
+    position: absolute;
+    bottom: var(--space-4);
+    left: var(--space-5);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-family: 'SF Mono', monospace;
+    letter-spacing: 0.04em;
+}
+
+.login-lang-toggle {
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-4);
+    display: flex;
+    background: var(--color-bg);
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--color-border-light);
+}
+
+.login-lang-toggle button {
+    padding: var(--space-1) var(--space-3);
+    border: none;
+    background: transparent;
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.login-lang-toggle button.active {
+    background: var(--color-primary);
+    color: white;
+}

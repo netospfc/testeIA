@@ -1,0 +1,111 @@
+.inv-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+}
+
+.inv-toolbar-right {
+    display: flex;
+    gap: var(--space-3);
+    align-items: center;
+}
+
+.filament-cell {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.filament-name {
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+}
+
+.filament-sku {
+    font-size: var(--font-size-xs);
+}
+
+.stock-cell {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+}
+
+.stock-grams {
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    white-space: nowrap;
+    min-width: 40px;
+}
+
+.color-input-row {
+    display: flex;
+    gap: var(--space-2);
+    align-items: center;
+}
+
+.color-input-row input[type="color"] {
+    width: 40px;
+    height: 36px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    padding: 2px;
+}
+
+/* Side panel */
+.side-panel-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 200;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.side-panel {
+    width: 420px;
+    max-width: 90vw;
+    background: var(--color-surface);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.side-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-5) var(--space-6);
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.side-panel-header h3 {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+}
+
+.side-panel-kpis {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-6);
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.side-panel-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--space-5) var(--space-6);
+}
+
+.side-panel-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-6);
+    border-top: 1px solid var(--color-border-light);
+}

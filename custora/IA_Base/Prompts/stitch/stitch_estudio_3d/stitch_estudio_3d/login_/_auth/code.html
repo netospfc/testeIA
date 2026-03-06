@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login - Estúdio Minimalista 3D</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<!-- Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0f0fbd", // Deep Blue
+                        "primary-hover": "#0a0a9e",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101022",
+                        "surface-light": "#ffffff",
+                        "surface-dark": "#1a1a2e",
+                        "border-light": "#e2e2e8",
+                        "border-dark": "#2a2a3e",
+                        "text-main": "#0d0d1b",
+                        "text-muted": "#6b7280",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Inter", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"],
+                    },
+                    backgroundImage: {
+                        'dot-grid': "radial-gradient(#cfcfe7 1px, transparent 1px)",
+                        'dot-grid-dark': "radial-gradient(#2a2a3e 1px, transparent 1px)",
+                    },
+                    animation: {
+                        'shake': 'shake 0.5s cubic-bezier(.36,.07,.19,.97) both',
+                    },
+                    keyframes: {
+                        shake: {
+                            '10%, 90%': { transform: 'translate3d(-1px, 0, 0)' },
+                            '20%, 80%': { transform: 'translate3d(2px, 0, 0)' },
+                            '30%, 50%, 70%': { transform: 'translate3d(-4px, 0, 0)' },
+                            '40%, 60%': { transform: 'translate3d(4px, 0, 0)' }
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom styles for dot grid background */
+        .bg-dots {
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-main antialiased h-screen w-full overflow-hidden flex flex-col transition-colors duration-300">
+<!-- Background Pattern -->
+<div class="fixed inset-0 z-0 pointer-events-none bg-dots bg-dot-grid dark:bg-dot-grid-dark opacity-40"></div>
+<!-- Main Content -->
+<div class="relative z-10 flex flex-1 flex-col items-center justify-center p-4">
+<!-- Auth Card -->
+<!-- Error State Class (simulate via JS logic normally): 'animate-shake border-red-500' -->
+<div class="w-full max-w-[400px] bg-surface-light dark:bg-surface-dark rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] border border-border-light dark:border-border-dark p-8 md:p-10 flex flex-col gap-8 transition-all duration-300">
+<!-- Header -->
+<div class="flex flex-col items-center text-center gap-2">
+<div class="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-2">
+<span class="material-symbols-outlined text-primary text-3xl">view_in_ar</span>
+</div>
+<h1 class="text-2xl font-bold tracking-tight text-text-main dark:text-white">ESTÚDIO 3D</h1>
+<p class="text-sm font-body text-text-muted dark:text-gray-400">Precision manufacturing economics</p>
+</div>
+<!-- Form -->
+<form class="flex flex-col gap-5" onsubmit="event.preventDefault();">
+<!-- Email Input -->
+<div class="group">
+<label class="block text-xs font-semibold uppercase tracking-wider text-text-muted mb-1.5 ml-1" for="email">E-mail</label>
+<div class="relative flex items-center">
+<span class="absolute left-3.5 text-text-muted/60 material-symbols-outlined text-[20px]">mail</span>
+<input class="w-full rounded-lg bg-background-light dark:bg-background-dark/50 border border-border-light dark:border-border-dark py-3 pl-10 pr-4 text-sm font-body text-text-main dark:text-white placeholder-text-muted/50 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all shadow-sm" id="email" placeholder="seu@email.com" type="email"/>
+</div>
+</div>
+<!-- Password Input -->
+<div class="group">
+<div class="flex justify-between items-center mb-1.5 ml-1">
+<label class="block text-xs font-semibold uppercase tracking-wider text-text-muted" for="password">Senha</label>
+</div>
+<div class="relative flex items-center">
+<span class="absolute left-3.5 text-text-muted/60 material-symbols-outlined text-[20px]">lock</span>
+<input class="w-full rounded-lg bg-background-light dark:bg-background-dark/50 border border-border-light dark:border-border-dark py-3 pl-10 pr-10 text-sm font-body text-text-main dark:text-white placeholder-text-muted/50 focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all shadow-sm" id="password" placeholder="••••••••" type="password"/>
+<button class="absolute right-3 text-text-muted/60 hover:text-primary transition-colors flex items-center justify-center" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility_off</span>
+</button>
+</div>
+</div>
+<!-- Actions -->
+<div class="pt-2 flex flex-col gap-4">
+<button class="w-full bg-primary hover:bg-primary-hover text-white font-semibold py-3 px-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 group" type="submit">
+<span>Acessar Estúdio</span>
+<span class="material-symbols-outlined text-sm transition-transform group-hover:translate-x-1">arrow_forward</span>
+</button>
+<div class="flex items-center justify-center gap-1 text-sm font-body">
+<span class="text-text-muted">Não tem acesso?</span>
+<a class="text-primary font-medium hover:underline hover:text-primary-hover transition-colors" href="#">
+                            Solicitar Acesso
+                        </a>
+</div>
+</div>
+</form>
+</div>
+<!-- Footer / Version -->
+<div class="mt-8 text-center">
+<p class="font-mono text-[10px] text-text-muted/40 uppercase tracking-widest">v2.4.0 • Build 8921</p>
+</div>
+</div>
+<!-- Decorative Corner Element (Optional Artistic Touch) -->
+<div class="fixed bottom-8 left-8 hidden md:block opacity-20 pointer-events-none">
+<div class="border border-text-main w-12 h-12 flex items-center justify-center rounded-sm">
+<span class="material-symbols-outlined text-2xl">grid_4x4</span>
+</div>
+<p class="font-mono text-[10px] mt-2 tracking-widest">SYS.READY</p>
+</div>
+<!-- Error Toast Example (Hidden by default) -->
+<!-- 
+    <div class="fixed top-6 right-6 bg-white dark:bg-surface-dark border-l-4 border-red-500 shadow-lg rounded-r p-4 flex items-center gap-3 animate-slide-in transform transition-all duration-300 translate-x-0">
+        <span class="material-symbols-outlined text-red-500">error</span>
+        <div>
+            <p class="text-sm font-bold text-gray-900 dark:text-white">Acesso Negado</p>
+            <p class="text-xs text-gray-500">Credenciais inválidas. Tente novamente.</p>
+        </div>
+    </div>
+    -->
+</body></html>

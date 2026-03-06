@@ -1,0 +1,203 @@
+.calc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr 1fr;
+    gap: var(--space-5);
+    align-items: start;
+}
+
+.calc-panel {
+    position: sticky;
+    top: calc(var(--navbar-height) + var(--space-4));
+}
+
+.calc-panel-title {
+    font-size: var(--font-size-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-5);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.calc-panel-subtitle {
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-4);
+}
+
+.stock-info {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    margin-top: var(--space-2);
+}
+
+.cost-lines {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.cost-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--font-size-sm);
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.cost-line span:first-child {
+    color: var(--color-text-secondary);
+}
+
+.cost-line span:last-child {
+    font-weight: 600;
+    font-family: 'SF Mono', monospace;
+}
+
+.packaging-btns {
+    display: flex;
+    gap: var(--space-2);
+}
+
+.pkg-btn {
+    flex: 1;
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    transition: var(--transition);
+}
+
+.pkg-btn:hover {
+    border-color: var(--color-primary-20);
+}
+
+.pkg-btn.active {
+    background: var(--color-primary);
+    color: white;
+    border-color: var(--color-primary);
+}
+
+.cost-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-4) 0;
+    margin-top: var(--space-4);
+    border-top: 2px solid var(--color-border);
+}
+
+.cost-total span:first-child {
+    font-weight: 700;
+    font-size: var(--font-size-base);
+}
+
+.cost-total-value {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--color-text);
+}
+
+.cost-base {
+    text-align: center;
+    padding: var(--space-5);
+    background: var(--color-bg);
+    border-radius: var(--radius);
+}
+
+.cost-base-label {
+    display: block;
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-2);
+}
+
+.cost-base-value {
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    color: var(--color-text);
+}
+
+.strategy-result {
+    margin-top: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+}
+
+.strategy-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.strategy-label {
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-secondary);
+}
+
+.strategy-value {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.sale-price {
+    color: var(--color-text);
+}
+
+.pricing-tip {
+    background: var(--color-primary-10);
+    border-radius: var(--radius);
+    padding: var(--space-4);
+}
+
+.tip-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-weight: 600;
+    font-size: var(--font-size-sm);
+    color: var(--color-primary);
+    margin-bottom: var(--space-2);
+}
+
+.tip-header .material-icons-outlined {
+    font-size: 18px;
+}
+
+.pricing-tip p {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+}
+
+@media (max-width: 1024px) {
+    .calc-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .calc-panel {
+        position: static;
+    }
+}

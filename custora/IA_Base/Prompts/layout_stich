@@ -1,0 +1,82 @@
+Crie o design de um aplicativo web moderno de planejamento de para gerar o custo do produtos impressos em impressora 3d baseado nos materiais utilizados para produção.  
+O aplicativo deve ter uma interface simples e intuitiva.
+O aplicativo deve calcular automaticamente o custo total e o lucro total, e exibir os resultados em uma tabela. 
+O aplicativo deve ter uma tela para cadastrar os produtos, uma tela para cadastrar os materiais e uma tela para cadastrar as configurações de impressão 3d.
+O aplicativo deve ter uma interface responsiva, que funcione em dispositivos móveis e desktops.
+
+1. TELA CADASTRO MATERIAL
+    - Deve ter um campo para o nome do material
+    - Deve ter um campo para o tipo do material (PLA, ABS, PETG, etc)
+    - Deve ter um campo para o preço do material (R$)
+    - Deve ter um campo para a quantidade do material (gramas)
+    - Deve ter um campo para o lote do materia
+    - Deve ter um campo para a cor do material
+    - Deve ter um campo para o peso do material
+    - Deve ter um campo para a quantidades de metros do material
+    - Deve ter exibir o valor calculado por grama do material (R$)
+    - Deve ter exibir o valor calculado por metro do material (R$)
+    - Deve ter um botão para salvar o material
+    - Deve ter um botão para excluir o material
+    - Deve ter um botão para editar o material
+    - Deve ter um botão para visualizar o material
+    - Deve ter um botão para voltar para a tela de cadastro de produtos
+    - Deve ter um botão para voltar para a tela de cadastro de configurações de impressão 3d
+
+2. TELA CADASTRO PRODUTO
+    Um produto pode ser composto de vários materiais que tem que ter o cadastro do material e tempo de fabricação do material. Para criar um produto tem diversos materiais sendo utilizado, por isso tem que ter uma lista com o material e a quantidade de cada material utilizado para compor o produto
+    - Deve ter um campo para o nome do produto
+    - Deve ter um campo para o material utilizado para a fabricação do produto (Exibir nome do material + tipo do material + cor do material)
+    - Deve ter um campo para a quantidade do produto (gramas)
+    - Deve ter um campo para impressora 3d utilizada para a fabricação do produto (opção do cadastro de impressora 3d)
+    - Deve ter um campo para tempo estimado de horas de fabricação do produto
+    - Deve ter um campo para a quantidades de metros do produto
+    - Deve ter exibir o valor calculado por grama do produto (R$)
+    - Deve ter exibir o valor calculado por metro do produto (R$)
+    - Deve ter um campo para o custo do produto (valor calculado por grama do produto * quantidade do produto * horas de fabricação do produto)
+    - Deve ter um campo para o lucro do produto (custo do produto + margem de lucro 30%, 50%, 70%, 100%)
+    - Deve ter um botão para salvar o produto
+    - Deve ter um botão para excluir o produto
+    - Deve ter um botão para editar o produto
+    - Deve ter um botão para visualizar o produto
+    - Deve ter um botão para voltar para a tela de cadastro de materiais
+    - Deve ter um botão para voltar para a tela de cadastro de configurações de impressão 3d
+
+3. TELA CADASTRO DA IMPRESSORA 3D
+    - Deve ter um campo para o nome da impressora 3d
+    - Deve ter um campo para consumo Watts da impressora 3d
+    - Deve calcular o valor hora da baseado no Watts (O valor hora vem do cadastro de gastos gerais "Custo Final KWh (SP) * Watts da impressora 3d")
+    - Deve ter um campo para o custo da impressora 3d ()
+    - Deve ter um botão para salvar a impressora 3d
+    - Deve ter um botão para excluir a impressora 3d
+    - Deve ter um botão para editar a impressora 3d
+    - Deve ter um botão para visualizar a impressora 3d
+    - Deve ter um botão para voltar para a tela de cadastro de configurações gerais
+
+
+4. TELA DE CONFIGURAÇÕES GERAIS
+    - Campos de configuração:
+        - Valor de Energia por Hora (SP)
+        - Custo Final KWh (SP) - (Valor de Energia por Hora (SP) /1000)
+        - Plastico Bola - Saco 4
+        - Caixa Papelao Pequena (20x20x9)
+        - Caixa Papelao Media (30x20x20)
+        - Papel Folder
+        - Margem Produtos
+        - Fita Durex
+        - Fita Durex 150 cm
+        - Fita Kraft
+        - Caixa Papelao Media (40x25x25)
+        - Papel de Seda
+        - Valor Kwatt
+        - Valor de Perda
+        - Start ID Lançamento
+        - Quantidade de Meses Amortização Impressora
+        - Watts Bambu P1S
+        - Fita Dupla-Face
+    - Deve ter uma opção para cada campo de configuração (mm,m g/cm3, mm2, horas/dias, horas/ano, reais, percentual, dias, Watts, meses)
+    - Deve ter um campo para colocar o valor de cada configuração
+    - Deve ter um botão para salvar as configurações
+    - Deve ter um botão para excluir as configurações
+    - Deve ter um botão para editar as configurações
+    - Deve ter um botão para visualizar as configurações
+    - Deve ter um botão para voltar para a tela de cadastro de configurações gerais

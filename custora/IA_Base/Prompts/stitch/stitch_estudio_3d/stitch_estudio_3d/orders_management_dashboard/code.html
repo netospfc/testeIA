@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Orders Management Dashboard - Estúdio Minimalista 3D</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#19a1e6",
+                "background-light": "#f6f7f8",
+                "background-dark": "#111c21",
+              },
+              fontFamily: {
+                "display": ["Space Grotesk", "sans-serif"]
+              },
+              borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+<style>
+        .kanban-column {
+            min-height: calc(100vh - 280px);
+        }
+        .soft-shadow {
+            box-shadow: 0 10px 25px -5px rgba(25, 161, 230, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-64 border-r border-primary/10 bg-white dark:bg-slate-900 flex flex-col h-full">
+<div class="p-6 flex items-center gap-3">
+<div class="size-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/30">
+<span class="material-symbols-outlined">deployed_code</span>
+</div>
+<div>
+<h2 class="font-bold text-sm tracking-tight leading-none">Estúdio</h2>
+<p class="text-xs text-primary font-medium">Minimalista 3D</p>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1 mt-4">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary/10 text-primary font-semibold transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all" href="#">
+<span class="material-symbols-outlined">package_2</span>
+<span>Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all" href="#">
+<span class="material-symbols-outlined">calculate</span>
+<span>Calculator</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-500 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="p-6 border-t border-primary/5">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full overflow-hidden border-2 border-primary/20">
+<img class="w-full h-full object-cover" data-alt="User avatar of studio manager" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvqYYOaBgWlZaKtckfdBOSJBErYLi0F1mlIHXCJrlv7iatYSwwxSWNKky1dAhYHfFwPzGT_86AGFARZtgjkuKjmklscxTiVPPiZ2U7ddYo7u3ETj1G8qimgaq-JNGVPiq-jqBErvSouNeWJb66BNmGRK57HtEiLXlw_GzlTQbIZtU2zIZnbnpi1hBr90d23g0YStyG0FDF03Rj5o3Ogr5P1TZdZkn0mnVIO8r_ArpeJvFgVSga60j-uiiHPjvvZEFy0AQs92aN3pc"/>
+</div>
+<div class="overflow-hidden">
+<p class="text-sm font-bold truncate leading-tight">Alex Silva</p>
+<p class="text-xs text-slate-500">Studio Admin</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col overflow-hidden">
+<!-- Header -->
+<header class="h-20 border-b border-primary/10 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md px-8 flex items-center justify-between z-10">
+<div class="flex items-center gap-6 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+<input class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-xl pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/50 transition-all" placeholder="Search orders, clients, or parts..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex bg-slate-100 dark:bg-slate-800 rounded-lg p-1">
+<button class="px-3 py-1 text-xs font-bold rounded bg-white dark:bg-slate-700 shadow-sm text-primary">PT</button>
+<button class="px-3 py-1 text-xs font-bold text-slate-500">EN</button>
+</div>
+<button class="flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-lg shadow-primary/25 hover:bg-primary/90 transition-all">
+<span class="material-symbols-outlined text-lg">add_circle</span>
+<span>New Order</span>
+</button>
+</div>
+</header>
+<!-- Board Area -->
+<div class="flex-1 overflow-x-auto overflow-y-hidden p-8">
+<div class="flex flex-col gap-6 h-full">
+<div class="flex items-baseline justify-between">
+<div>
+<h1 class="text-3xl font-black tracking-tight">Orders &amp; Commissions</h1>
+<p class="text-slate-500 text-sm mt-1">Real-time tracking for active 3D printing workflows.</p>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-primary/10 bg-white dark:bg-slate-900 text-xs font-bold text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+                            Filter
+                        </button>
+</div>
+</div>
+<!-- Kanban Board -->
+<div class="flex gap-6 h-full overflow-x-auto pb-4">
+<!-- Queue Column -->
+<div class="flex flex-col min-w-[320px] w-1/4">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2">
+<span class="size-2 rounded-full bg-slate-400"></span>
+<h3 class="font-bold text-sm uppercase tracking-wider text-slate-500">Queue</h3>
+<span class="bg-slate-100 dark:bg-slate-800 text-[10px] font-bold px-1.5 py-0.5 rounded text-slate-600">3</span>
+</div>
+</div>
+<div class="kanban-column space-y-4">
+<!-- Order Card 1 -->
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl soft-shadow border border-slate-100 dark:border-slate-800 group hover:border-primary/30 transition-all cursor-grab active:cursor-grabbing">
+<div class="flex justify-between items-start mb-3">
+<span class="text-[10px] font-bold uppercase py-1 px-2 bg-blue-50 dark:bg-blue-900/30 text-blue-600 rounded">Prototype</span>
+<span class="text-xs text-slate-400 font-medium">#ORD-204</span>
+</div>
+<div class="w-full aspect-video bg-slate-100 dark:bg-slate-800 rounded-lg mb-3 overflow-hidden">
+<img class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform" data-alt="3D printed mechanical gear model" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDduYf9SzDEC2yT1W3CaxwdyAANiBfPZB2B3BwRNTakDipd5M-1qWnOJL5HOTJAR6uc0F2s1d9p0T7M92WSfyHevgYrsqAADYc5urbrCBOH3ULoMjXTsAZl179moMgUGBZNWVPQxCGg50exPWGUpj3NSQoxW2RzU9UaFLS4FmPYe93dfp6jMage7_kDLypcZlSQyMeCC6w2SzkEYAYdLVJiFS3AuvQtsLReze8reI25AgFeMrr8FYq7_SvKFdUnon3sdSBgmS3bCTg"/>
+</div>
+<h4 class="font-bold text-sm mb-1">Mechanical Gear Set</h4>
+<div class="flex items-center gap-4 mt-3">
+<div class="flex items-center gap-1.5 text-xs text-slate-500">
+<span class="material-symbols-outlined text-sm">texture</span>
+<span>PETG</span>
+</div>
+<div class="flex items-center gap-1.5 text-xs text-slate-500">
+<span class="material-symbols-outlined text-sm">payments</span>
+<span>R$ 145,00</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Printing Column -->
+<div class="flex flex-col min-w-[320px] w-1/4">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2">
+<span class="size-2 rounded-full bg-primary animate-pulse"></span>
+<h3 class="font-bold text-sm uppercase tracking-wider text-slate-500">Printing</h3>
+<span class="bg-primary/10 text-primary text-[10px] font-bold px-1.5 py-0.5 rounded">1 Active</span>
+</div>
+</div>
+<div class="kanban-column space-y-4">
+<!-- Active Printing Card -->
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl soft-shadow border-2 border-primary group transition-all">
+<div class="flex justify-between items-start mb-3">
+<span class="text-[10px] font-bold uppercase py-1 px-2 bg-primary/10 text-primary rounded">High Detail</span>
+<span class="text-xs text-slate-400 font-medium">#ORD-199</span>
+</div>
+<div class="w-full aspect-video bg-slate-100 dark:bg-slate-800 rounded-lg mb-3 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Artistic sculpture being 3D printed" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtNDvuSzmx4MkS5xv_n0BP-cUgD1suYwdwLUx491xa7xC03YXQFscrqCUyxK49wy2KO6P8ggDqp5GofLpF-m-MUFfP52NgmVNBNFRrSmak7gaLr9UxZWw50fKtRHtRlLGBSJbZ3lRwXJKscHIKyjM7XCMTV7G2L1NX2Zb2mofwp2iqP_6OKM0Ffxmkl-1MkanXW0pngq0w647V7Jk7Uh7nkwdqhM8th43EyO2GRrrJzj9I1KiuKQoqZwTrPhPFp0RPXhfMPdRL5vs"/>
+</div>
+<h4 class="font-bold text-sm mb-1">Modern Vase V2</h4>
+<div class="mt-4 space-y-2">
+<div class="flex justify-between text-[10px] font-bold text-slate-500">
+<span>75% Completed</span>
+<span>02h 14m left</span>
+</div>
+<div class="h-1.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 75%"></div>
+</div>
+</div>
+<div class="flex items-center gap-3 mt-4 pt-4 border-t border-slate-50 dark:border-slate-800">
+<span class="material-symbols-outlined text-primary text-sm">print_connect</span>
+<span class="text-xs font-bold">Printer #01 - Ender 3 S1</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Post-Processing Column -->
+<div class="flex flex-col min-w-[320px] w-1/4">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2">
+<span class="size-2 rounded-full bg-amber-400"></span>
+<h3 class="font-bold text-sm uppercase tracking-wider text-slate-500">Post-Processing</h3>
+<span class="bg-amber-100 dark:bg-amber-900/30 text-amber-600 text-[10px] font-bold px-1.5 py-0.5 rounded">2 Pending</span>
+</div>
+</div>
+<div class="kanban-column space-y-4">
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl soft-shadow border border-slate-100 dark:border-slate-800 group hover:border-amber-300 transition-all">
+<div class="flex justify-between items-start mb-3">
+<span class="text-[10px] font-bold uppercase py-1 px-2 bg-amber-50 dark:bg-amber-900/20 text-amber-600 rounded">Sanding</span>
+<span class="text-xs text-slate-400 font-medium">#ORD-188</span>
+</div>
+<div class="w-full aspect-video bg-slate-100 dark:bg-slate-800 rounded-lg mb-3 overflow-hidden">
+<img class="w-full h-full object-cover opacity-80" data-alt="Tabletop gaming miniatures" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqWMzv8JEmH2xtFPr0MZcdtvn7SwvvnmLKee2LHhx2agMYv747BHmzqizk5hylRsURonHEMI8uQ-5DdODAwu3eIoR1OFYfed_R7q3HN6zBpdmnuB6kpvhfi7z9v_tKIhP8XGqedJh_xGjbe_QAUggUV1sSOvXJJQPPL3fQF_JuTsitjMKKyCY81Cj38YmcBuZSDAP-euOPyGsi9FPg0gCZ6QMd8dLjQHbKlRED0fUoHilTHCVg0TpJrZv1lTWXVyBPA_Sx7od4KsA"/>
+</div>
+<h4 class="font-bold text-sm mb-1">Gaming Miniatures Kit</h4>
+<div class="flex items-center justify-between mt-3 text-xs">
+<div class="flex items-center gap-1 text-slate-500">
+<span class="material-symbols-outlined text-sm">palette</span>
+<span>Resin - Grey</span>
+</div>
+<span class="font-bold text-primary">R$ 320,00</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Shipped Column -->
+<div class="flex flex-col min-w-[320px] w-1/4">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2">
+<span class="size-2 rounded-full bg-emerald-400"></span>
+<h3 class="font-bold text-sm uppercase tracking-wider text-slate-500">Shipped</h3>
+<span class="bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 text-[10px] font-bold px-1.5 py-0.5 rounded">12 Completed</span>
+</div>
+</div>
+<div class="kanban-column space-y-4">
+<!-- Empty State Example or Recent Success -->
+<div class="bg-emerald-50/50 dark:bg-emerald-900/10 border border-emerald-100 dark:border-emerald-900/30 p-4 rounded-xl border-dashed flex flex-col items-center justify-center text-center py-8">
+<span class="material-symbols-outlined text-emerald-300 text-4xl mb-2">local_shipping</span>
+<p class="text-xs font-bold text-emerald-600">All recent orders shipped!</p>
+<p class="text-[10px] text-emerald-500/70 mt-1">Check the history for details.</p>
+</div>
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl soft-shadow border border-slate-100 dark:border-slate-800 opacity-60 grayscale-[0.5]">
+<div class="flex justify-between items-start mb-3">
+<span class="text-[10px] font-bold uppercase py-1 px-2 bg-slate-100 dark:bg-slate-800 text-slate-600 rounded">Delivered</span>
+<span class="text-xs text-slate-400 font-medium">#ORD-154</span>
+</div>
+<h4 class="font-bold text-sm mb-1">Architecture Model</h4>
+<div class="flex items-center justify-between mt-3 text-xs">
+<span class="text-slate-500">Tracking: BR-9921-X</span>
+<button class="text-primary font-bold">Details</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

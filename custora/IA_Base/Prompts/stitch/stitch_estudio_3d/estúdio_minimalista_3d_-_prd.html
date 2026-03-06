@@ -1,0 +1,260 @@
+# Estúdio Minimalista 3D
+
+## Product Overview
+
+**The Pitch:** A precision financial dashboard for 3D printing studios that transforms messy hobbyist guesswork into rigorous manufacturing economics.
+
+**For:** Professional makers and print farm owners who value margin over volume and need to know the exact cost of every gram extruded.
+
+**Device:** Desktop (Primary workspace)
+
+**Design Direction:** "Architectural SaaS." A rigorous, grid-based layout dominated by whitespace, refined typography, and subtle depth. It feels like a high-end spreadsheet crossed with a Swiss poster.
+
+**Inspired by:** Linear, Ramp, Teenage Engineering (UI philosophy).
+
+---
+
+## Screens
+
+- **[Login / Auth]:** Minimalist centered card on a structured noise background.
+- **[Dashboard (Calculator)]:** The command center. Real-time cost modeling with live margin adjustments.
+- **[Inventory (Filaments & Printers)]:** Split-view list and detail panel for raw materials and hardware.
+- **[Product Architect (BOM)]:** Visual builder for assembling products from materials and processing time.
+- **[Studio Settings]:** Global variables input (KwH cost, overheads, packaging presets).
+- **[Financial Reports]:** High-level histograms and profit/loss breakdowns.
+
+---
+
+## Key Flows
+
+**[Cost Modeling a New Prototype]:** User calculates viability of a new print.
+
+1. User is on **Dashboard** -> selects "New Calculation".
+2. User selects **Product Preset** (e.g., "Articulated Dragon") and **Filament** (e.g., "Silk Gold PLA").
+3. System pulls data (weight, print time, depreciation) -> displays **Cost Breakdown**.
+4. User adjusts **Margin Slider** from 30% to 50%.
+5. **Final Price** updates instantly -> User clicks "Save to Portfolio".
+
+---
+
+<details>
+<summary>Design System</summary>
+
+## Color Palette
+
+- **Primary:** `#1A1A1A` - Primary actions, active states (Stark Black)
+- **Background:** `#F9FAFB` - Main canvas (Cool White)
+- **Surface:** `#FFFFFF` - Cards, inputs (Pure White)
+- **Text:** `#27272A` - Primary content (Zinc 800)
+- **Muted:** `#9CA3AF` - Labels, secondary text (Zinc 400)
+- **Border:** `#E5E7EB` - Hairline dividers (Zinc 200)
+- **Accent (Profit):** `#10B981` - Positive margins (Emerald 500)
+- **Accent (Cost):** `#F43F5E` - Expenses, losses (Rose 500)
+- **Highlight:** `#F3F4F6` - Hover states (Zinc 100)
+
+## Typography
+
+- **Headings:** **Space Grotesk**, 600, 24px (Display), 18px (Section) - Technical, distinctive.
+- **Body:** **Inter**, 400, 14px - Highly legible UI standard.
+- **Numbers/Financials:** **JetBrains Mono**, 500, 13px - Monospace for tabular alignment.
+- **Small/Captions:** **Inter**, 500, 12px (Uppercase, tracked wide).
+
+**Style notes:**
+- **Shadows:** Ultra-soft, diffused shadows (`0 4px 20px -2px rgba(0,0,0,0.05)`) to lift cards off the background.
+- **Borders:** 1px solid `#E5E7EB` on all containers. No floating elements without boundaries.
+- **Radius:** 6px (Tight, precise corners).
+
+## Design Tokens
+
+```css
+:root {
+  --color-primary: #1A1A1A;
+  --bg-app: #F9FAFB;
+  --bg-surface: #FFFFFF;
+  --text-main: #27272A;
+  --text-mono: 'JetBrains Mono', monospace;
+  --font-display: 'Space Grotesk', sans-serif;
+  --radius-sm: 6px;
+  --shadow-card: 0 2px 12px rgba(0,0,0,0.04);
+}
+```
+
+</details>
+
+---
+
+<details>
+<summary>Screen Specifications</summary>
+
+### [Login / Auth]
+
+**Purpose:** Secure entry point with brand establishment.
+
+**Layout:** Centered floating card (400px width) on a subtle dot-grid background.
+
+**Key Elements:**
+- **Brand Header:** "ESTÚDIO 3D" (Space Grotesk, 24px) centered.
+- **Input Stack:**
+    - Email: `Input` with inner label "E-mail".
+    - Password: `Input` with inner label "Senha".
+- **Primary Action:** "Acessar Estúdio" button, full width, `#1A1A1A` background.
+- **Secondary Action:** "Solicitar Acesso" text link below, muted.
+
+**States:**
+- **Error:** Shake animation on card, red border on inputs, toast message "Credenciais inválidas".
+
+---
+
+### [Dashboard (Calculator)]
+
+**Purpose:** The "Work table." Where raw data becomes financial strategy.
+
+**Layout:** Three-column grid. Left: Inputs. Center: Breakdown. Right: Results.
+
+**Key Elements:**
+- **Input Column (Left):**
+    - **Selector:** Product Dropdown (Searchable).
+    - **Selector:** Filament Dropdown (Shows stock/color).
+    - **Selector:** Printer Dropdown (Shows Watts).
+    - **Time Input:** "Horas de Impressão" (Number stepper).
+    - **Weight Input:** "Peso (g)" (Number stepper).
+- **Breakdown List (Center):**
+    - **Visual Stack:** A vertical list of costs.
+    - **Row:** "Material" | `R$ XX.XX` (Calculated from g/price).
+    - **Row:** "Energia" | `R$ XX.XX` (Calculated from Watts * Time * KWh).
+    - **Row:** "Depreciação" | `R$ XX.XX` (Machine value / lifespan).
+    - **Row:** "Embalagem" | Toggle selector (Box S/M/L).
+- **Result Card (Right):** Sticky panel.
+    - **Total Cost:** Large display (`48px`).
+    - **Markup Slider:** Range input (0% - 200%).
+    - **Sale Price:** Dynamic value in Green.
+    - **Net Profit:** `(Sale - Cost)` displayed in monospace.
+
+**Components:**
+- **FinancialRow:** Flex container, dotted leader line between label and value.
+- **MarginSlider:** Custom thumb, track turns green as profit increases.
+
+---
+
+### [Inventory (Filaments & Printers)]
+
+**Purpose:** Manage raw assets and hardware specs.
+
+**Layout:** Tabbed view ("Filamentos" | "Impressoras"). List view with side-sheet editor.
+
+**Key Elements (Filaments Tab):**
+- **Data Grid:**
+    - **Columns:** Nome, Tipo (Badge), Fabricante, Peso Restante (ProgressBar), Custo/g (Mono).
+    - **Row Action:** Hover shows "Edit" and "Duplicate".
+- **Add Button:** Floating Action Button (FAB) or Top Right Header button "Novo Filamento".
+
+**Key Elements (Printers Tab):**
+- **Card Grid:** Instead of a list, square cards for each machine.
+    - **Header:** Printer Name (e.g., "Bambu Lab X1C").
+    - **Metric:** Consumo: `350W`.
+    - **Metric:** Custo Hora: `R$ 1.45`.
+    - **Status:** "Active" (Green dot).
+
+**Interactions:**
+- **Click Row:** Opens detailed editing drawer from right side.
+
+---
+
+### [Studio Settings]
+
+**Purpose:** Define the invisible costs of doing business.
+
+**Layout:** Single column, narrow container (600px max-width) for focus.
+
+**Key Elements:**
+- **Energy Section:**
+    - Input: "Custo KWh (Conta de Luz)" - `R$ 0.92`.
+- **Packaging (Insumos) Section:**
+    - Repeater Field: List of packaging items.
+    - Row: Name (e.g., "Caixa P"), Unit Cost (e.g., "R$ 2.50").
+- **Overhead Section:**
+    - Input: "Depreciação Padrão (Meses)" - Default `24`.
+    - Input: "Margem de Erro (%)" - Default `5%` (Adds buffer to all calcs).
+
+---
+
+### [Product Architect (BOM)]
+
+**Purpose:** Define complex products made of multiple parts.
+
+**Layout:** Master-Detail. Left sidebar lists products; Main area is the composition canvas.
+
+**Key Elements:**
+- **Header:** Product Name, SKU, Total Weight (Sum of parts).
+- **Part List:**
+    - **Table Header:** "Componente", "Peso (g)", "Tempo (h)".
+    - **Row:** Editable inputs for each part of the assembly.
+    - **Add Row:** "Adicionar Parte".
+- **Processing:**
+    - Checkbox group: "Lixamento", "Pintura", "Montagem" (Adds fixed labor costs).
+
+**Components:**
+- **MetricBadge:** Pill shape, gray background, monospace text showing totals.
+
+---
+
+### [Financial Reports]
+
+**Purpose:** Macro view of business health.
+
+**Layout:** Dashboard grid of widgets.
+
+**Key Elements:**
+- **Widget 1: Cost Distribution:** Donut chart (Material vs Energy vs Overhead).
+- **Widget 2: Filament Utility:** Bar chart showing most used materials by weight.
+- **Widget 3: Printer Efficiency:** Table showing `Hours Printed` vs `Energy Cost`.
+- **Top Metrics Bar:**
+    - "Lucro Médio/Peça"
+    - "Custo Energético Mensal"
+    - "Valor em Estoque (Filamentos)"
+
+**Responsive:**
+- **Desktop:** 3-column grid.
+- **Tablet:** 2-column grid.
+- **Mobile:** Single column stack.
+
+</details>
+
+---
+
+<details>
+<summary>Build Guide</summary>
+
+**Stack:**
+- **Frontend:** HTML5, Tailwind CSS v3 (JIT mode).
+- **Icons:** Phosphor Icons (Thin weight).
+- **Charts:** Recharts or Chart.js (styled minimally).
+
+**Build Order:**
+1. **[Design Tokens]:** Implement Tailwind config first. Establish fonts and spacing scale.
+2. **[Studio Settings]:** Build the core math variables (KWh, Overheads). Nothing works without these.
+3. **[Inventory]:** Build Filament/Printer CRUD.
+4. **[Dashboard]:** Implement the calculation engine using data from steps 2 & 3.
+5. **[Reports]:** Visualize the accumulated data.
+
+**Tailwind Config Snippet:**
+
+```javascript
+// tailwind.config.js
+module.exports = {
+  theme: {
+    fontFamily: {
+      sans: ['Inter', 'sans-serif'],
+      display: ['Space Grotesk', 'sans-serif'],
+      mono: ['JetBrains Mono', 'monospace'],
+    },
+    extend: {
+      colors: {
+        zinc: { 850: '#1A1A1A' }, // Custom Primary
+      }
+    }
+  }
+}
+```
+
+</details>
